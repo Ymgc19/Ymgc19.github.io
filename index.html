@@ -4,7 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Water, Nature and Frogs</title>
+    <style>
+        /* 左右に分割するための CSS */
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .left, .right {
+            width: 48%; /* 左右の幅を調整 */
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
+
+
 <body>
     <header>
         <h1>YAMAGUHCHI Yuhei</h1>
@@ -12,8 +26,8 @@
     <p></p>
     山口侑平のウェブサイトです．
 
-    <main>
-        <div id = "left">
+    <div class="container">
+        <div class="left">
         <section>
             <h2>［経歴］</h2>
             <h3>［学歴］</h3>
@@ -26,12 +40,12 @@
         </section>
         </div>
 
-        <div id = "right">
+        <div class = "right">
             <h2>
                 カエルを愛そう
             </h2>
         </div>
-    </main>
+
     <footer>
         <p>&copy; YAMAGUHCHI Yuhei</p>
     </footer>
