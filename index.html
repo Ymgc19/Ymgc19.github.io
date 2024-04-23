@@ -1,65 +1,53 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Water, Nature and Frogs</title>
+    <title>動画を背景にする</title>
     <style>
-        /* 左右に分割するための CSS */
-        .container {
-            display: flex;
-            justify-content: space-between;
+        /* CSSでheader要素をフルスクリーンに拡大し、z-indexを指定して重なり順を設定します */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1; /* コンテンツの上に動画を表示するためにz-indexをマイナス値に設定 */
+            overflow: hidden; /* header内での動画のオーバーフローを制御 */
         }
-        .left, .right {
-            width: 48%; /* 左右の幅を調整 */
-            padding: 10px;
-            border: 1px solid #ccc;
+
+        /* 画面いっぱいに動画を表示するためのスタイル */
+        video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* その他のコンテンツに対するスタイル */
+        .content {
+            padding-top: 100px; /* headerの高さ分をコンテンツが下にずらす */
         }
     </style>
 </head>
-
-
 <body>
+    <!-- header要素にvideo要素を配置して動画を表示 -->
     <header>
-        <h1>Water, Nature and Frogs</h1>
+        <video autoplay muted loop>
+            <source src="/Users/yamaguchiyuhei/Desktop/yamannu.io/pic and mov/IMG_1772.mov" type="video/mp4">
+            <!-- 動画ファイルのパスを指定 -->
+            Your browser does not support the video tag.
+        </video>
     </header>
-    <p>
-    Welcome to the website of <b>YAMAGUHCHI Yuhei</b>. I am M2 student at <b>Tohoku University</b>. 
-    My major field is <b>computational social science</b>. 
-    Especially, I am interested in the application of <b>satellite remote sensing</b> and <b>spatial analysis</b> to <b>sociology</b>.
-    </p>
 
-    <div class="container">
-        <div class="left">
-        <section>
-            <!-- 学歴 -->
-            <h3>Educational Background</h3>
-            <ul>
-                <li>Behavioral Science, Faculty of Arts and Letters, Tohoku University (04/2019-03/2023)</li>
-                <li>Computational Humanities and Social Sciences, Graduate School of Arts and Letters, Tohoku University (04/2023-)</li>
-            </ul>
-
-            <!-- 学位プログラムなど -->
-            <h3>Adopted programs</h3>
-            <ul>
-                <li>WISE program for AI Electronics, Tohoku University (04/2023-)</li>
-                <li>Division for Interdiciplinary Advanced Research and Education (2024-)</li>
-                <li>CEReS Overseas Joint Research Program (2024-)</li>
-            </ul>
-            
-            <!-- 職歴 -->
-            <h3>Work Experience</h3>
-            <ul>
-                <li>research assistant at Graduate School of Information Sciences, Tohoku University (10/2022-03/2023)</li>
-                <li>research assistant at National Institute for Environental Studies (04/2023-)</li>
-            </ul>
-
-        </section>
-        </div>
-
-        <div class = "right">
-            <h2>NEWS</h2>
-
-        </div>
+    <!-- その他のコンテンツ -->
+    <div class="content">
+        <h1>Webページのコンテンツ</h1>
+        <!-- ここに他のコンテンツを追加 -->
+    </div>
 </body>
 </html>
