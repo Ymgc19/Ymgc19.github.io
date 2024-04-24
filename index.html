@@ -30,12 +30,17 @@
     </style>
     <!-- スクロール可能にする -->
     <style>
-        .scrollable {
-            border: none;
-            overflow-y: auto; /* 垂直方向のスクロールを可能にする */
-            max-height: 200px; /* 表示領域の最大高さ */
+        .scroll-container {
+          border: 1px solid #ccc; /* 枠線 */
+          overflow-y: auto; /* 垂直方向のスクロールを可能にする */
+          max-height: 200px; /* 表示領域の最大高さ */
         }
-    </style>
+        /* 余白を調整 */
+        .scroll-container > * {
+          margin: 0;
+          padding: 0;
+        }
+      </style>
 </head>
 
 
@@ -83,7 +88,7 @@
         </section>
         </div>
 
-        <div class = "scrollable" class = "right">
+        <div class = "scroll-container" class = "right">
             <h2>NEWS</h2>
             <h3>conferences</h3>
             <ul>
