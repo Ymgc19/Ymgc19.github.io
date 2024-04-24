@@ -1,44 +1,42 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>&nbsp;HABITAT of RETICENT RIBBITTER</title>
-    <style>
-        /* 左右に分割するための CSS */
-        .container {
-            display: flex;
-            justify-content: space-between;
-        }
-        .left, .right {
-            width: 48%; /* 左右の幅を調整 */
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
-    </style>
-    <style>
-        /* body要素のマージンをリセットして、全画面に広がるようにします */
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        /* video要素の幅を100%に設定して、画面幅に合わせます */
-        video {
-            width: 100%;
-            height: auto; /* アスペクト比を維持します */
-        }
-    </style>
-    <!-- スクロール可能にする -->
-    <style>
-        .scrollable {
-          border: none;
-          overflow-y: auto; /* 垂直方向のスクロールを可能にする */
-          max-height: 200px; /* 表示領域の最大高さ */
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>&nbsp;HABITAT of RETICENT RIBBITTER</title>
+<style>
+    /* 左右に分割するための CSS */
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
+    .left, .right {
+        width: 48%; /* 左右の幅を調整 */
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+    /* body要素のマージンをリセットして、全画面に広がるようにします */
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    /* video要素の幅を100%に設定して、画面幅に合わせます */
+    video {
+        width: 100%;
+        height: auto; /* アスペクト比を維持します */
+    }
+    /* スクロール可能にする */
+    .scrollable {
+        border: none;
+        overflow-y: auto; /* 垂直方向のスクロールを可能にする */
+        max-height: 200px; /* 表示領域の最大高さ */
+    }
+    /* 余白を調整 */
+    .left, .right {
+        margin-bottom: 10px;
+    }
+</style>
 </head>
-
-
 <body>
     <!-- 動画を出す -->
     <video controls autoplay muted loop>
@@ -56,35 +54,34 @@
     </p>
 
     <div class="container">
-        <div class = "left">
-        <section>
-            <h2>Profile</h2>
-            <!-- 学歴 -->
-            <h3>Educational Background</h3>
-            <ul>
-                <li>Behavioral Science, Faculty of Arts and Letters, Tohoku University (04/2019-03/2023)</li>
-                <li>Computational Humanities and Social Sciences, Graduate School of Arts and Letters, Tohoku University (04/2023-)</li>
-            </ul>
+        <div class="left">
+            <section>
+                <h2>Profile</h2>
+                <!-- 学歴 -->
+                <h3>Educational Background</h3>
+                <ul>
+                    <li>Behavioral Science, Faculty of Arts and Letters, Tohoku University (04/2019-03/2023)</li>
+                    <li>Computational Humanities and Social Sciences, Graduate School of Arts and Letters, Tohoku University (04/2023-)</li>
+                </ul>
 
-            <!-- 学位プログラムなど -->
-            <h3>Adopted Programs</h3>
-            <ul>
-                <li>WISE program for AI Electronics, Tohoku University (04/2023-)</li>
-                <li>Division for Interdiciplinary Advanced Research and Education (2024-)</li>
-                <li>CEReS Overseas Joint Research Program (2024-)</li>
-            </ul>
-            
-            <!-- 職歴 -->
-            <h3>Work Experience</h3>
-            <ul>
-                <li>research assistant at Graduate School of Information Sciences, Tohoku University (10/2022-03/2023)</li>
-                <li>research assistant at National Institute for Environental Studies (04/2023-)</li>
-            </ul>
-
-        </section>
+                <!-- 学位プログラムなど -->
+                <h3>Adopted Programs</h3>
+                <ul>
+                    <li>WISE program for AI Electronics, Tohoku University (04/2023-)</li>
+                    <li>Division for Interdiciplinary Advanced Research and Education (2024-)</li>
+                    <li>CEReS Overseas Joint Research Program (2024-)</li>
+                </ul>
+                
+                <!-- 職歴 -->
+                <h3>Work Experience</h3>
+                <ul>
+                    <li>research assistant at Graduate School of Information Sciences, Tohoku University (10/2022-03/2023)</li>
+                    <li>research assistant at National Institute for Environental Studies (04/2023-)</li>
+                </ul>
+            </section>
         </div>
 
-        <div class = "scrollable" class = "right">
+        <div class="right scrollable">
             <h2>News</h2>
             <h3>Conferences</h3>
             <ul>
@@ -104,8 +101,5 @@
     </video>
 
     <p>Email: yuhei.yamaguchi.t1🐸dc.tohoku.ac.jp</p>
-
 </body>
-
-
 </html>
