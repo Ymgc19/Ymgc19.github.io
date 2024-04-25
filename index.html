@@ -36,8 +36,20 @@
         margin-bottom: 10px;
         border: 1px solid #39349f;
     }
+    /* 横スクロールを有効にするためのスタイル */
+    .pdf-container {
+        width: 100%;
+        overflow-x: auto; /* 横スクロールを有効にする */
+        white-space: nowrap; /* 横スクロールするために改行を無効にする */
+    }
+    .pdf-container iframe {
+        display: inline-block; /* iframeを横並びに配置する */
+    }
 </style>
 </head>
+
+
+<!-- ここからWebページの本編 -->
 
 <head>
     <meta name="google-site-verification" content="1gm9hmOIxzmMj_i6514FsR_E0PMRkEVM_IZVokq9-4I" />
@@ -123,7 +135,9 @@
 
     <!-- ここから研究内容など -->
     <h1> Research Interest </h1>   
-    <iframe src="20240415_院ゼミ.pdf" width="100%" height="600px" frameborder="0"></iframe>
+    <div class="pdf-container">
+        <iframe src="research_slide.pdf" width="600px" height="800px" frameborder="0"></iframe>
+    </div>
 
     <video controls autoplay muted loop>
         <source src="pic and mov/nanao.mp4" type="video/mp4">
