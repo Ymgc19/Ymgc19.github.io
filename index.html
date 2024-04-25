@@ -36,6 +36,17 @@
         margin-bottom: 10px;
         border: 1px solid #39349f;
     }
+    /* ギャラリーのスタイル */
+    .image-gallery {
+    width: 100%;
+    overflow-x: auto; /* 横スクロールを有効にする */
+    white-space: nowrap; /* 横スクロールするために改行を無効にする */
+    }
+    .image-gallery img {
+        width: 300px; /* 画像の幅 */
+        height: auto; /* 高さは自動で調整 */
+        margin-right: 10px; /* 画像の間隔 */
+    }
 </style>
 </head>
 
@@ -126,6 +137,13 @@
 
     <!-- ここから研究内容など -->
     <h1> Research Interest </h1>   
+    <div class="image-gallery">
+        <img src="ang.png" alt="Image 1">
+        <img src="shirine.jpg" alt="Image 2">
+        <!-- 他の画像も追加 -->
+    </div>
+
+
 
     <video controls autoplay muted loop>
         <source src="pic and mov/nanao.mp4" type="video/mp4">
