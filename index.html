@@ -12,6 +12,7 @@
     .container {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap; /* フレックスボックスのアイテムが折り返されるように設定 */
     }
     .left, .right {
         width: 48%; /* 左右の幅を調整 */
@@ -50,10 +51,20 @@
         height: auto; /* 高さは自動で調整 */
         margin-right: 10px; /* 画像の間隔 */
     }
+
+    /* スマホ向けのレイアウト調整 */
+    @media (max-width: 768px) {
+        .container {
+            display: block; /* 1カラムにする */
+        }
+        .left, .right {
+            width: 100%; /* 幅を100%に */
+            margin-bottom: 20px; /* 余白を追加 */
+        }
+    }
 </style>
 </body>
 </head>
-
 
 <!-- ここからWebページの本編 -->
 <head>
