@@ -235,24 +235,18 @@
 
 
 
-<!-- 折れ線グラフを作成 -->
+<!-- ============================================== 折れ線グラフを作成 ============================================== -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <canvas id="myChart" width="50%" height="50%"></canvas>
 
-    <!-- halfの記録 -->
     <script>
-        const labels = ['2023-06-18', '2023-11-18', '2024-05-12', '2024-09-29', '2024-10-06'];
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'マラソンの記録',
-                data: ['2:31:07', '1:56:28', '1:49:21', '1:46:28', '1:45:30'], // マラソン記録（h:mm:ss）
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: false,
-                tension: 0.1
-            }]
-        };
+        // フルマラソンの日付と記録
+        const fullMarathonLabels = ['2023-03-12'];
+        const fullMarathonTimes = ['5:50:49'];
+    
+        // ハーフマラソンの日付と記録
+        const halfMarathonLabels = ['2023-06-18', '2023-11-18', '2024-05-12', '2024-09-29', '2024-10-06'];
+        const halfMarathonTimes = ['2:31:07', '1:56:28', '1:49:21', '1:46:28', '1:45:30'];
     
         // 時間（h:mm:ss）を秒に変換する関数
         function timeToSeconds(timeStr) {
@@ -260,8 +254,32 @@
             return hours * 3600 + minutes * 60 + seconds;
         }
     
-        // マラソン記録を秒数に変換
-        data.datasets[0].data = data.datasets[0].data.map(timeToSeconds);
+        // フルマラソンとハーフマラソンの記録を秒数に変換
+        const fullMarathonData = fullMarathonTimes.map(timeToSeconds);
+        const halfMarathonData = halfMarathonTimes.map(timeToSeconds);
+    
+        // グラフのデータ構成
+        const data = {
+            labels: [...new Set([...fullMarathonLabels, ...halfMarathonLabels])], // 日付をすべて含める
+            datasets: [
+                {
+                    label: 'フルマラソンの記録',
+                    data: fullMarathonLabels.map((date, index) => ({ x: date, y: fullMarathonData[index] })),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: false,
+                    tension: 0.1
+                },
+                {
+                    label: 'ハーフマラソンの記録',
+                    data: halfMarathonLabels.map((date, index) => ({ x: date, y: halfMarathonData[index] })),
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    fill: false,
+                    tension: 0.1
+                }
+            ]
+        };
     
         const config = {
             type: 'line',
@@ -280,13 +298,17 @@
                         },
                         title: {
                             display: true,
-                            text: 'TIME'
+                            text: '時間 (h:mm:ss)'
                         }
                     },
                     x: {
                         title: {
                             display: true,
-                            text: 'DATA'
+                            text: '日付'
+                        },
+                        type: 'time',
+                        time: {
+                            unit: 'day' // 日単位で表示
                         }
                     }
                 }
@@ -299,6 +321,7 @@
             config
         );
     </script>
+    
 
 
 <!-- ====================================================================================================================== -->
