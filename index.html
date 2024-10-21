@@ -224,14 +224,87 @@
 
 
     <h2>マラソン Marathon</h2>
-    <li>12 Mar. 2023, 能登和倉万葉の里マラソン, full, 5:50:49</li>
-    <li>18 Jun. 2023, 寒河江さくらんぼマラソン, half, 2:31:07</li>
-    <li>18 Nov. 2023, となみ庄川散居村縦断マラソン, half, 1:56:28</li>
-    <li>10 Mar. 2024, 能登和倉万葉の里マラソン, full, 地震により中止 (canceled due to earthquake)</li>
-    <li>12 May. 2024, 仙台国際ハーフマラソン, half, 1:49:21</li>
-    <li>29 Sep. 2024, 川内の郷かえるマラソン, half, 1:46:28</li>
-    <li>6 Oct. 2024, 山形まるごとマラソン, half, 1:45:30</li>
-    <li>3 Nov. 2024, 東北・みやぎ復興マラソン, full</li>
+    <li>12 Mar. 2023, 能登和倉万葉の里マラソン, full, 5:50:49.</li>
+    <li>18 Jun. 2023, 寒河江さくらんぼマラソン, half, 2:31:07.</li>
+    <li>18 Nov. 2023, となみ庄川散居村縦断マラソン, half, 1:56:28.</li>
+    <li>10 Mar. 2024, 能登和倉万葉の里マラソン, full, 地震により中止 (canceled due to earthquake).</li>
+    <li>12 May. 2024, 仙台国際ハーフマラソン, half, 1:49:21.</li>
+    <li>29 Sep. 2024, 川内の郷かえるマラソン, half, 1:46:28.</li>
+    <li>6 Oct. 2024, 山形まるごとマラソン, half, 1:45:30/</li>
+    <li>3 Nov. 2024, 東北・みやぎ復興マラソン, full, .</li>
+
+
+
+<!-- 折れ線グラフを作成 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <canvas id="myChart" width="400" height="200"></canvas>
+
+    <script>
+        // 日付データとマラソン記録データ
+        const labels = ['2024-10-01', '2024-10-02', '2024-10-03', '2024-10-04', '2024-10-05'];
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'マラソンの記録',
+                data: ['3:25:30', '3:15:45', '3:10:20', '3:40:00', '3:30:15'], // マラソン記録（h:mm:ss）
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: false,
+                tension: 0.1
+            }]
+        };
+    
+        // 時間（h:mm:ss）を秒に変換する関数
+        function timeToSeconds(timeStr) {
+            const [hours, minutes, seconds] = timeStr.split(':').map(Number);
+            return hours * 3600 + minutes * 60 + seconds;
+        }
+    
+        // マラソン記録を秒数に変換
+        data.datasets[0].data = data.datasets[0].data.map(timeToSeconds);
+    
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            callback: function(value) {
+                                const hours = Math.floor(value / 3600);
+                                const minutes = Math.floor((value % 3600) / 60);
+                                const seconds = value % 60;
+                                return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '時間 (h:mm:ss)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: '日付'
+                        }
+                    }
+                }
+            }
+        };
+    
+        // グラフを描画
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+
+
+
+
+
+
 
     <h2>チャリスタグラム CYCLEGRAM</h2>   
     <p>
