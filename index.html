@@ -47,16 +47,21 @@
       width: 100%;
       background-color: #4CAF50;
       color: white;
-      padding: 20px;
+      padding: 10px;
       text-align: center;
       transition: top 0.5s ease; /* スムーズなアニメーション */
+      z-index: 10; /* 重なりを最前面にする */
     }
     .main-content {
-      height: 200vh;
+      padding-top: 0px; /* 初期状態のパディング */
+      transition: padding-top 0.5s ease; /* スムーズなアニメーション */
+      font-size: 24px;
+    }
+    .content-area {
+      height: 400vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 24px;
     }
 </style>
 </body>
@@ -158,6 +163,7 @@
     <!-- 勢いよくスクロールした際に出る隠しコマンド　-->
     <script>
         const hiddenContent = document.getElementById('hiddenContent');
+        const mainContent = document.getElementById('mainContent');
         let lastScrollY = window.scrollY;
         let lastScrollTime = Date.now();
     
@@ -172,7 +178,8 @@
     
           // 一定の速度を超えると「勢いよくスクロール」と判断
           if (scrollDistance > 50 && scrollSpeed > 10) { // 条件は調整可能
-            hiddenContent.style.top = '0';
+            hiddenContent.style.top = '0'; // 隠しコンテンツを上部に表示
+            mainContent.style.paddingTop = '100px'; // メインコンテンツを下にスライド
           }
     
           // 状態更新
