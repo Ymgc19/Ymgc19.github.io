@@ -45,15 +45,18 @@
     .hidden-content {
       display: none; /* 最初は隠す */
       width: 100%;
-      background-color: #ffff00;
+      background-color: #fff700;
       color: white;
-      padding: 10px;
+      padding: 20px;
       box-sizing: border-box;
       font-size: 20px;
-      transition: transform 0.5s ease; /* スムーズにアニメーション */
       position: relative;
       z-index: 10; /* 他のコンテンツより上に表示 */
+      opacity: 0; /* 初期状態では透明 */
+      transform: translateY(-50px); /* 初期位置は画面外 */
+      transition: opacity 1s ease, transform 1s ease; /* なめらかなアニメーション */
     }
+
     /* メインコンテンツのスタイル */
     .main-content {
       height: 100vh; /* 画面全体を表示 */
@@ -164,65 +167,66 @@
     </font>
 
     <!-- うまく表示するための設計 -->
-    <script>
-      let scrollTimer;
-      let scrollStartPosition = 0;
-      let isScrollingUp = false;
-      let scrollDuration = 0;
-      const requiredScrollDuration = 3000; // 3秒間のスクロール時間
-      let isContentVisible = false; // 隠しコンテンツが表示されたかどうかのフラグ
-      let hiddenContentCount = 0; // 追加された隠しコンテンツの数
-  
-      // 初期画面でのスクロール位置を設定
-      window.addEventListener('load', () => {
-        scrollStartPosition = window.scrollY;
-      });
-  
-      // スクロールイベントで上方向のスクロール継続を検知
-      window.addEventListener('scroll', () => {
-        const currentScrollPosition = window.scrollY;
-        
-        // 上方向スクロールが検知された場合
-        if (currentScrollPosition < scrollStartPosition) {
-          if (!isScrollingUp && !isContentVisible) {
-            // 初めて上方向のスクロールを開始した場合タイマーを開始
-            isScrollingUp = true;
-            scrollDuration = 0;
-            scrollTimer = setInterval(() => {
-              scrollDuration += 100; // 100msずつ加算
-              
-              // 3秒間経過したら隠れたコンテンツを表示
-              if (scrollDuration >= requiredScrollDuration) {
-                // 新しい隠しコンテンツをページの上に追加
-                const newContent = document.createElement('div');
-                newContent.className = 'hidden-content';
-                newContent.innerHTML = `
-                    <div style="text-align: center; font-family: 'Alegreya Sans SC', sans-serif;>
-                      <p style="color: black;">
-                        <a href="https://ymgc19.github.io/montagnes" target="_blank" style="color: black; text-decoration: none; font-size: 20px;">
-                          Les montagnes à découvrir à vélo
-                        </a>
-                      </p>
-                    </div>
-                `;
-                document.body.insertBefore(newContent, document.body.firstChild); // ページの上に追加
-                newContent.style.display = 'block';  // 新しいコンテンツを表示
-                newContent.style.transform = 'translateY(0)'; // アニメーションでスライドイン
-                hiddenContentCount++; // 追加された隠しコンテンツのカウントを増やす
-                isContentVisible = true; // コンテンツ表示フラグを立てる
-                clearInterval(scrollTimer); // タイマー停止
-              }
-            }, 100);
-          }
-        } else {
-          // 上方向のスクロールが停止した場合または逆方向の場合
-          isScrollingUp = false;
-          clearInterval(scrollTimer); // タイマーをリセット
+  <script>
+    let scrollTimer;
+    let scrollStartPosition = 0;
+    let isScrollingUp = false;
+    let scrollDuration = 0;
+    const requiredScrollDuration = 3000; // 3秒間のスクロール時間
+    let isContentVisible = false; // 隠しコンテンツが表示されたかどうかのフラグ
+    let hiddenContentCount = 0; // 追加された隠しコンテンツの数
+
+    // 初期画面でのスクロール位置を設定
+    window.addEventListener('load', () => {
+      scrollStartPosition = window.scrollY;
+    });
+
+    // スクロールイベントで上方向のスクロール継続を検知
+    window.addEventListener('scroll', () => {
+      const currentScrollPosition = window.scrollY;
+      
+      // 上方向スクロールが検知された場合
+      if (currentScrollPosition < scrollStartPosition) {
+        if (!isScrollingUp && !isContentVisible) {
+          // 初めて上方向のスクロールを開始した場合タイマーを開始
+          isScrollingUp = true;
+          scrollDuration = 0;
+          scrollTimer = setInterval(() => {
+            scrollDuration += 100; // 100msずつ加算
+            
+            // 3秒間経過したら隠れたコンテンツを表示
+            if (scrollDuration >= requiredScrollDuration) {
+              // 新しい隠しコンテンツをページの上に追加
+              const newContent = document.createElement('div');
+              newContent.className = 'hidden-content';
+              newContent.innerHTML = `
+                <div style="text-align: center; font-family: 'Arial', sans-serif;">
+                  <p>これが追加された新しいコンテンツです。</p>
+                  <a href="Ymgc19.github.io/montagnes" target="_blank" style="color: blue; text-decoration: underline;">Les montagnes à découvrir à vélo</a>
+                </div>
+              `;
+              document.body.insertBefore(newContent, document.body.firstChild); // ページの上に追加
+              newContent.style.display = 'block';  // 新しいコンテンツを表示
+              setTimeout(() => {
+                // 1秒後にアニメーションを開始
+                newContent.style.opacity = '1';
+                newContent.style.transform = 'translateY(0)';
+              }, 10);
+              hiddenContentCount++; // 追加された隠しコンテンツのカウントを増やす
+              isContentVisible = true; // コンテンツ表示フラグを立てる
+              clearInterval(scrollTimer); // タイマー停止
+            }
+          }, 100);
         }
-        
-        // スクロール位置を更新
-        scrollStartPosition = currentScrollPosition;
-      });
-    </script>
+      } else {
+        // 上方向のスクロールが停止した場合または逆方向の場合
+        isScrollingUp = false;
+        clearInterval(scrollTimer); // タイマーをリセット
+      }
+      
+      // スクロール位置を更新
+      scrollStartPosition = currentScrollPosition;
+    });
+  </script>
 </body>
 </html>
