@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>勢いよく上方向スクロールでコンテンツを表示</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .hidden-content {
+      position: fixed;
+      top: -100px; /* 初期状態では画面の外に隠す */
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      transition: top 0.5s ease; /* スムーズなアニメーション */
+    }
+    .main-content {
+      height: 200vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 隠れたコンテンツ -->
+  <div id="hiddenContent" class="hidden-content">
+    勢いよく上方向にスクロールしたときに表示されるコンテンツです。
+  </div>
+
+  <!-- メインコンテンツ -->
+  <div class="main-content">
+    メインコンテンツ
+  </div>
+
+  <script>
+    const hiddenContent = document.getElementById('hiddenContent');
+    let lastScrollY = window.scrollY;
+    let lastScrollTime = Date.now();
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const currentTime = Date.now();
+      const scrollDistance = lastScrollY - currentScrollY;
+      const timeDifference = currentTime - lastScrollTime;
+
+      // スクロールの速度を計算 (距離 / 時間)
+      const scrollSpeed = scrollDistance / timeDifference;
+
+      // 一定の速度を超えると「勢いよくスクロール」と判断
+      if (scrollDistance > 50 && scrollSpeed > 0.5) { // 条件は調整可能
+        hiddenContent.style.top = '0';
+      }
+
+      // 状態更新
+      lastScrollY = currentScrollY;
+      lastScrollTime = currentTime;
+    });
+  </script>
+
+</body>
+</html>

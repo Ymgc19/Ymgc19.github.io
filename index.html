@@ -8,7 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>&nbsp;HABITAT of RETICENT RIBBITTER by YAMAGUCHI Yuhei (山口侑平) - Tohoku University</title>
 <style>
-    /* ページ全体の文字色を緑に設定 */
     body {
       color: #5347dd; 
     }
@@ -42,6 +41,23 @@
             margin-bottom: 20px; /* 余白を追加 */
         }
     }
+    .hidden-content {
+      position: fixed;
+      top: -100px; /* 初期状態では画面の外に隠す */
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      transition: top 0.5s ease; /* スムーズなアニメーション */
+    }
+    .main-content {
+      height: 200vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+    }
 </style>
 </body>
 </head>
@@ -51,17 +67,15 @@
 <!-- ここからWebページの本編 -->
 <head>
     <meta name="google-site-verification" content="1gm9hmOIxzmMj_i6514FsR_E0PMRkEVM_IZVokq9-4I" />
+</head>
 <body style="background-color: #ffffff;">
 
-<!--    
-    <video controls autoplay muted loop playsinline>
-        <source src="pic and mov/oirase.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video> 
--->
+    <!-- 隠れコンテンツ -->
+    <div id="hiddenContent" class="hidden-content">
+        勢いよく上方向にスクロールしたときに表示されるコンテンツです。
+    </div>
 
     <img src="pic and mov/cicling/gatake_kouyou.jpg" alt="ヘッダー写真" style="width: 100%; height: auto;"> 
-<!--    <img src="pic and mov/my_room.png" alt="my_room", style="width: 75%; height: auto%;"> -->
 
 
     <font face="Times New Roman">
@@ -125,14 +139,6 @@
     <li>2024/11/03, 東北・みやぎ復興マラソン, 4:25:04.</li>
     <li>2025/01/19，石垣島マラソン，::.</li>
 
-<!--
-    <p></p>
-    <h2>［小説］</h2>
-    <ul>
-        <li><a href= "https://ymgc19.github.io/tower">街とその塔</a>（気が向いたときに建設していく）</li>
-    </ul>
--->
-
     <p></p>
     <h2>［関連リンク］</h2>
     <ul>
@@ -149,6 +155,30 @@
         <a href= "https://rpubs.com/Ymgc_Kerorin" target="_blank">RPubs</a>  
     </p>
     </font>
+    <!-- 勢いよくスクロールした際に出る隠しコマンド　-->
+    <script>
+        const hiddenContent = document.getElementById('hiddenContent');
+        let lastScrollY = window.scrollY;
+        let lastScrollTime = Date.now();
+    
+        window.addEventListener('scroll', () => {
+          const currentScrollY = window.scrollY;
+          const currentTime = Date.now();
+          const scrollDistance = lastScrollY - currentScrollY;
+          const timeDifference = currentTime - lastScrollTime;
+    
+          // スクロールの速度を計算 (距離 / 時間)
+          const scrollSpeed = scrollDistance / timeDifference;
+    
+          // 一定の速度を超えると「勢いよくスクロール」と判断
+          if (scrollDistance > 50 && scrollSpeed > 10) { // 条件は調整可能
+            hiddenContent.style.top = '0';
+          }
+    
+          // 状態更新
+          lastScrollY = currentScrollY;
+          lastScrollTime = currentTime;
+        });
+      </script>
 </body>
-</head>
 </html>
