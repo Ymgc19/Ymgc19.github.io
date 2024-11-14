@@ -3,66 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>勢いよく上方向スクロールでコンテンツを表示</title>
+  <title>隠しコンテンツを上にスクロール</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
+      height: 200%; /* ページ全体に長さを追加してスクロールできるようにします */
     }
+
+    /* 隠しコンテンツのスタイル */
     .hidden-content {
-      position: fixed;
-      top: -100px; /* 初期状態では画面の外に隠す */
+      display: none; /* 最初は隠す */
+      position: absolute;
+      top: 0; /* 上に表示 */
       width: 100%;
       background-color: #4CAF50;
       color: white;
       padding: 20px;
-      text-align: center;
-      transition: top 0.5s ease; /* スムーズなアニメーション */
+      box-sizing: border-box;
+      font-size: 20px;
+      transition: top 0.5s ease; /* スムーズにアニメーション */
     }
+
+    /* メインコンテンツのスタイル */
     .main-content {
-      height: 200vh;
+      height: 100vh; /* 画面全体を表示 */
+      background-color: #f0f0f0;
+      padding: 20px;
+      font-size: 24px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 24px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
-  <!-- 隠れたコンテンツ -->
+  <!-- 隠しコンテンツ（最初は非表示） -->
   <div id="hiddenContent" class="hidden-content">
-    勢いよく上方向にスクロールしたときに表示されるコンテンツです。
+    <h2>隠しコンテンツが表示されました！</h2>
+    <p>ここに様々な情報を追加できます。</p>
+    <p>上にスクロールすると、このように表示されます。</p>
+    <p>さらに情報を追加し、スクロールして閲覧可能です。</p>
+    <p>上にスクロールを続けることで、情報が表示されていきます。</p>
   </div>
 
   <!-- メインコンテンツ -->
   <div class="main-content">
-    メインコンテンツ
+    <p>スクロールして隠しコンテンツを表示させてください</p>
   </div>
 
   <script>
+    let scrollTimer;
+    let scrollStartPosition = 0;
+    let isScrollingUp = false;
+    let scrollDuration = 0;
+    const requiredScrollDuration = 3000; // 3秒間のスクロール時間
     const hiddenContent = document.getElementById('hiddenContent');
-    let lastScrollY = window.scrollY;
-    let lastScrollTime = Date.now();
+    let isContentVisible = false; // 隠しコンテンツが表示されたかどうかのフラグ
+    
+    // 初期画面でのスクロール位置を設定
+    window.addEventListener('load', () => {
+      scrollStartPosition = window.scrollY;
+    });
 
+    // スクロールイベントで上方向のスクロール継続を検知
     window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      const currentTime = Date.now();
-      const scrollDistance = lastScrollY - currentScrollY;
-      const timeDifference = currentTime - lastScrollTime;
-
-      // スクロールの速度を計算 (距離 / 時間)
-      const scrollSpeed = scrollDistance / timeDifference;
-
-      // 一定の速度を超えると「勢いよくスクロール」と判断
-      if (scrollDistance > 50 && scrollSpeed > 0.5) { // 条件は調整可能
-        hiddenContent.style.top = '0';
+      const currentScrollPosition = window.scrollY;
+      
+      // 上方向スクロールが検知された場合
+      if (currentScrollPosition < scrollStartPosition) {
+        if (!isScrollingUp && !isContentVisible) {
+          // 初めて上方向のスクロールを開始した場合タイマーを開始
+          isScrollingUp = true;
+          scrollDuration = 0;
+          scrollTimer = setInterval(() => {
+            scrollDuration += 100; // 100msずつ加算
+            
+            // 3秒間経過したら隠れたコンテンツを表示
+            if (scrollDuration >= requiredScrollDuration) {
+              hiddenContent.style.display = 'block';  // コンテンツを表示
+              isContentVisible = true; // コンテンツ表示フラグを立てる
+              clearInterval(scrollTimer); // タイマー停止
+            }
+          }, 100);
+        }
+      } else {
+        // 上方向のスクロールが停止した場合または逆方向の場合
+        isScrollingUp = false;
+        clearInterval(scrollTimer); // タイマーをリセット
       }
-
-      // 状態更新
-      lastScrollY = currentScrollY;
-      lastScrollTime = currentTime;
+      
+      // スクロール位置を更新
+      scrollStartPosition = currentScrollPosition;
     });
   </script>
 

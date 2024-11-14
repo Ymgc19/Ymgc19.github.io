@@ -41,27 +41,30 @@
             margin-bottom: 20px; /* 余白を追加 */
         }
     }
+    /* 隠しコンテンツのスタイル */
     .hidden-content {
-      position: fixed;
-      top: -100px; /* 初期状態では画面の外に隠す */
+      display: none; /* 最初は隠す */
+      position: absolute;
+      top: 0; /* 上に表示 */
       width: 100%;
       background-color: #4CAF50;
       color: white;
-      padding: 10px;
-      text-align: center;
-      transition: top 0.5s ease; /* スムーズなアニメーション */
-      z-index: 10; /* 重なりを最前面にする */
+      padding: 20px;
+      box-sizing: border-box;
+      font-size: 20px;
+      transition: top 0.5s ease; /* スムーズにアニメーション */
     }
+
+    /* メインコンテンツのスタイル */
     .main-content {
-      padding-top: 0px; /* 初期状態のパディング */
-      transition: padding-top 0.5s ease; /* スムーズなアニメーション */
+      height: 100vh; /* 画面全体を表示 */
+      background-color: #f0f0f0;
+      padding: 20px;
       font-size: 24px;
-    }
-    .content-area {
-      height: 400vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      text-align: center;
     }
 </style>
 </body>
@@ -75,10 +78,17 @@
 </head>
 <body style="background-color: #ffffff;">
 
-    <!-- 隠れコンテンツ -->
-    <div id="hiddenContent" class="hidden-content">
-        勢いよく上方向にスクロールしたときに表示されるコンテンツです。
-    </div>
+  <!-- 隠しコンテンツ -->
+  <div id="hiddenContent" class="hidden-content">
+    <h2>隠しコンテンツが表示されています</h2>
+    <p>ここに様々な情報を追加できます。</p>
+    <p>スクロール可能な領域です。</p>
+    <p>さらに情報を追加して、スクロールして確認できます。</p>
+    <p>このエリアを上にスクロールすると、さらに多くの情報が表示されます。</p>
+    <p>スクロールして、隠しコンテンツを閲覧してください。</p>
+    <p>続けてスクロールするとさらに内容が表示されます。</p>
+    <p>この方法を使うと、ページの一部に大量の情報を表示できます。</p>
+  </div>
 
     <img src="pic and mov/cicling/gatake_kouyou.jpg" alt="ヘッダー写真" style="width: 100%; height: auto;"> 
 
@@ -160,31 +170,51 @@
         <a href= "https://rpubs.com/Ymgc_Kerorin" target="_blank">RPubs</a>  
     </p>
     </font>
-    <!-- 勢いよくスクロールした際に出る隠しコマンド　-->
+
+    <!-- うまく表示するための設計 -->
     <script>
+        let scrollTimer;
+        let scrollStartPosition = 0;
+        let isScrollingUp = false;
+        let scrollDuration = 0;
+        const requiredScrollDuration = 3000; // 3秒間のスクロール時間
         const hiddenContent = document.getElementById('hiddenContent');
-        const mainContent = document.getElementById('mainContent');
-        let lastScrollY = window.scrollY;
-        let lastScrollTime = Date.now();
+        let isContentVisible = false; // 隠しコンテンツが表示されたかどうかのフラグ
+        
+        // 初期画面でのスクロール位置を設定
+        window.addEventListener('load', () => {
+          scrollStartPosition = window.scrollY;
+        });
     
+        // スクロールイベントで上方向のスクロール継続を検知
         window.addEventListener('scroll', () => {
-          const currentScrollY = window.scrollY;
-          const currentTime = Date.now();
-          const scrollDistance = lastScrollY - currentScrollY;
-          const timeDifference = currentTime - lastScrollTime;
-    
-          // スクロールの速度を計算 (距離 / 時間)
-          const scrollSpeed = scrollDistance / timeDifference;
-    
-          // 一定の速度を超えると「勢いよくスクロール」と判断
-          if (scrollDistance > 50 && scrollSpeed > 10) { // 条件は調整可能
-            hiddenContent.style.top = '0'; // 隠しコンテンツを上部に表示
-            mainContent.style.paddingTop = '100px'; // メインコンテンツを下にスライド
+          const currentScrollPosition = window.scrollY;
+          
+          // 上方向スクロールが検知された場合
+          if (currentScrollPosition < scrollStartPosition) {
+            if (!isScrollingUp && !isContentVisible) {
+              // 初めて上方向のスクロールを開始した場合タイマーを開始
+              isScrollingUp = true;
+              scrollDuration = 0;
+              scrollTimer = setInterval(() => {
+                scrollDuration += 100; // 100msずつ加算
+                
+                // 3秒間経過したら隠れたコンテンツを表示
+                if (scrollDuration >= requiredScrollDuration) {
+                  hiddenContent.style.display = 'block';  // コンテンツを表示
+                  isContentVisible = true; // コンテンツ表示フラグを立てる
+                  clearInterval(scrollTimer); // タイマー停止
+                }
+              }, 100);
+            }
+          } else {
+            // 上方向のスクロールが停止した場合または逆方向の場合
+            isScrollingUp = false;
+            clearInterval(scrollTimer); // タイマーをリセット
           }
-    
-          // 状態更新
-          lastScrollY = currentScrollY;
-          lastScrollTime = currentTime;
+          
+          // スクロール位置を更新
+          scrollStartPosition = currentScrollPosition;
         });
       </script>
 </body>
