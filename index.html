@@ -44,17 +44,16 @@
     /* 隠しコンテンツのスタイル */
     .hidden-content {
       display: none; /* 最初は隠す */
-      position: absolute;
-      top: 0; /* 上に表示 */
       width: 100%;
-      background-color: #4CAF50;
+      background-color: #ffff00;
       color: white;
-      padding: 20px;
+      padding: 10px;
       box-sizing: border-box;
       font-size: 20px;
-      transition: top 0.5s ease; /* スムーズにアニメーション */
+      transition: transform 0.5s ease; /* スムーズにアニメーション */
+      position: relative;
+      z-index: 10; /* 他のコンテンツより上に表示 */
     }
-
     /* メインコンテンツのスタイル */
     .main-content {
       height: 100vh; /* 画面全体を表示 */
@@ -65,6 +64,12 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+    }
+    /* 他のコンテンツスタイル */
+    .additional-content {
+      padding: 1px;
+      background-color: #fff;
+      border-top: 2px solid #ccc;
     }
 </style>
 </body>
@@ -77,18 +82,6 @@
     <meta name="google-site-verification" content="1gm9hmOIxzmMj_i6514FsR_E0PMRkEVM_IZVokq9-4I" />
 </head>
 <body style="background-color: #ffffff;">
-
-  <!-- 隠しコンテンツ -->
-  <div id="hiddenContent" class="hidden-content">
-    <h2>隠しコンテンツが表示されています</h2>
-    <p>ここに様々な情報を追加できます。</p>
-    <p>スクロール可能な領域です。</p>
-    <p>さらに情報を追加して、スクロールして確認できます。</p>
-    <p>このエリアを上にスクロールすると、さらに多くの情報が表示されます。</p>
-    <p>スクロールして、隠しコンテンツを閲覧してください。</p>
-    <p>続けてスクロールするとさらに内容が表示されます。</p>
-    <p>この方法を使うと、ページの一部に大量の情報を表示できます。</p>
-  </div>
 
     <img src="pic and mov/cicling/gatake_kouyou.jpg" alt="ヘッダー写真" style="width: 100%; height: auto;"> 
 
@@ -126,7 +119,6 @@
         <img src="pic and mov/cicling/nousya.jpeg" alt="東北納車大学">
         <img src="pic and mov/cicling/atago.JPG" alt="愛宕神社にて">
         <img src="pic and mov/cicling/kuma.JPG" alt="青葉山の熊出没注意にて">
-<!--        <img src="pic and mov/cicling/gatake_rayout.png" alt="ガタケのレイアウト"> -->
         <img src="pic and mov/cicling/izumigatake.png" alt="霧がすごい泉ヶ岳にて">
         <img src="pic and mov/cicling/yuriage.png" alt="ゆりあげBLUEにて">
         <img src="pic and mov/cicling/gatake2.JPEG" alt="ガタケ2回目にて">
@@ -173,49 +165,64 @@
 
     <!-- うまく表示するための設計 -->
     <script>
-        let scrollTimer;
-        let scrollStartPosition = 0;
-        let isScrollingUp = false;
-        let scrollDuration = 0;
-        const requiredScrollDuration = 3000; // 3秒間のスクロール時間
-        const hiddenContent = document.getElementById('hiddenContent');
-        let isContentVisible = false; // 隠しコンテンツが表示されたかどうかのフラグ
+      let scrollTimer;
+      let scrollStartPosition = 0;
+      let isScrollingUp = false;
+      let scrollDuration = 0;
+      const requiredScrollDuration = 3000; // 3秒間のスクロール時間
+      let isContentVisible = false; // 隠しコンテンツが表示されたかどうかのフラグ
+      let hiddenContentCount = 0; // 追加された隠しコンテンツの数
+  
+      // 初期画面でのスクロール位置を設定
+      window.addEventListener('load', () => {
+        scrollStartPosition = window.scrollY;
+      });
+  
+      // スクロールイベントで上方向のスクロール継続を検知
+      window.addEventListener('scroll', () => {
+        const currentScrollPosition = window.scrollY;
         
-        // 初期画面でのスクロール位置を設定
-        window.addEventListener('load', () => {
-          scrollStartPosition = window.scrollY;
-        });
-    
-        // スクロールイベントで上方向のスクロール継続を検知
-        window.addEventListener('scroll', () => {
-          const currentScrollPosition = window.scrollY;
-          
-          // 上方向スクロールが検知された場合
-          if (currentScrollPosition < scrollStartPosition) {
-            if (!isScrollingUp && !isContentVisible) {
-              // 初めて上方向のスクロールを開始した場合タイマーを開始
-              isScrollingUp = true;
-              scrollDuration = 0;
-              scrollTimer = setInterval(() => {
-                scrollDuration += 100; // 100msずつ加算
-                
-                // 3秒間経過したら隠れたコンテンツを表示
-                if (scrollDuration >= requiredScrollDuration) {
-                  hiddenContent.style.display = 'block';  // コンテンツを表示
-                  isContentVisible = true; // コンテンツ表示フラグを立てる
-                  clearInterval(scrollTimer); // タイマー停止
-                }
-              }, 100);
-            }
-          } else {
-            // 上方向のスクロールが停止した場合または逆方向の場合
-            isScrollingUp = false;
-            clearInterval(scrollTimer); // タイマーをリセット
+        // 上方向スクロールが検知された場合
+        if (currentScrollPosition < scrollStartPosition) {
+          if (!isScrollingUp && !isContentVisible) {
+            // 初めて上方向のスクロールを開始した場合タイマーを開始
+            isScrollingUp = true;
+            scrollDuration = 0;
+            scrollTimer = setInterval(() => {
+              scrollDuration += 100; // 100msずつ加算
+              
+              // 3秒間経過したら隠れたコンテンツを表示
+              if (scrollDuration >= requiredScrollDuration) {
+                // 新しい隠しコンテンツをページの上に追加
+                const newContent = document.createElement('div');
+                newContent.className = 'hidden-content';
+                newContent.innerHTML = `
+                    <div style="text-align: center; font-family: 'Roboto', sans-serif;">
+                      <p style="color: black;">
+                        <a href="https://ymgc19.github.io/montagnes" target="_blank" style="color: black; text-decoration: none; font-size: 20px;">
+                          Les montagnes à découvrir à vélo
+                        </a>
+                      </p>
+                    </div>
+                `;
+                document.body.insertBefore(newContent, document.body.firstChild); // ページの上に追加
+                newContent.style.display = 'block';  // 新しいコンテンツを表示
+                newContent.style.transform = 'translateY(0)'; // アニメーションでスライドイン
+                hiddenContentCount++; // 追加された隠しコンテンツのカウントを増やす
+                isContentVisible = true; // コンテンツ表示フラグを立てる
+                clearInterval(scrollTimer); // タイマー停止
+              }
+            }, 100);
           }
-          
-          // スクロール位置を更新
-          scrollStartPosition = currentScrollPosition;
-        });
-      </script>
+        } else {
+          // 上方向のスクロールが停止した場合または逆方向の場合
+          isScrollingUp = false;
+          clearInterval(scrollTimer); // タイマーをリセット
+        }
+        
+        // スクロール位置を更新
+        scrollStartPosition = currentScrollPosition;
+      });
+    </script>
 </body>
 </html>

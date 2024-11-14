@@ -9,14 +9,12 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      height: 200%; /* ページ全体に長さを追加してスクロールできるようにします */
+      height: 300%; /* ページ全体に長さを追加してスクロールできるようにします */
     }
 
     /* 隠しコンテンツのスタイル */
     .hidden-content {
       display: none; /* 最初は隠す */
-      position: absolute;
-      top: 0; /* 上に表示 */
       width: 100%;
       background-color: #4CAF50;
       color: white;
@@ -41,15 +39,6 @@
 </head>
 <body>
 
-  <!-- 隠しコンテンツ（最初は非表示） -->
-  <div id="hiddenContent" class="hidden-content">
-    <h2>隠しコンテンツが表示されました！</h2>
-    <p>ここに様々な情報を追加できます。</p>
-    <p>上にスクロールすると、このように表示されます。</p>
-    <p>さらに情報を追加し、スクロールして閲覧可能です。</p>
-    <p>上にスクロールを続けることで、情報が表示されていきます。</p>
-  </div>
-
   <!-- メインコンテンツ -->
   <div class="main-content">
     <p>スクロールして隠しコンテンツを表示させてください</p>
@@ -61,9 +50,9 @@
     let isScrollingUp = false;
     let scrollDuration = 0;
     const requiredScrollDuration = 3000; // 3秒間のスクロール時間
-    const hiddenContent = document.getElementById('hiddenContent');
     let isContentVisible = false; // 隠しコンテンツが表示されたかどうかのフラグ
-    
+    let hiddenContentCount = 0; // 追加された隠しコンテンツの数
+
     // 初期画面でのスクロール位置を設定
     window.addEventListener('load', () => {
       scrollStartPosition = window.scrollY;
@@ -84,7 +73,16 @@
             
             // 3秒間経過したら隠れたコンテンツを表示
             if (scrollDuration >= requiredScrollDuration) {
-              hiddenContent.style.display = 'block';  // コンテンツを表示
+              // 新しい隠しコンテンツをページの上に追加
+              const newContent = document.createElement('div');
+              newContent.className = 'hidden-content';
+              newContent.innerHTML = `
+                <h2>新しい隠しコンテンツ ${hiddenContentCount + 1}</h2>
+                <p>これが追加された新しいコンテンツです。</p>
+              `;
+              document.body.insertBefore(newContent, document.body.firstChild); // ページの上に追加
+              newContent.style.display = 'block';  // 新しいコンテンツを表示
+              hiddenContentCount++; // 追加された隠しコンテンツのカウントを増やす
               isContentVisible = true; // コンテンツ表示フラグを立てる
               clearInterval(scrollTimer); // タイマー停止
             }
