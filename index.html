@@ -2,48 +2,23 @@
 <html lang="ja">
 
 <head>
-    <meta name="google-site-verification" content="1gm9hmOIxzmMj_i6514FsR_E0PMRkEVM_IZVokq9-4I" />
-<body>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>&nbsp;HABITAT of RETICENT RIBBITTER by YAMAGUCHI Yuhei (山口侑平) - Tohoku University</title>
-<style>
+  <meta name="google-site-verification" content="1gm9hmOIxzmMj_i6514FsR_E0PMRkEVM_IZVokq9-4I" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HABITAT of RETICENT RIBBITTER by YAMAGUCHI Yuhei (山口侑平) - Tohoku University</title>
+  <style>
     body {
-      color: #5347dd; 
-    }
-    /* body要素のマージンをリセットして、全画面に広がるようにします */
-    body {
-        margin: 0 5%;
-        padding: 0;
-        line-height: 1.6;
+      color: #5347dd;
+      margin: 0 5%;
+      padding: 0;
+      line-height: 1.6;
     }
     a {
       color: red;
     }
-    /* ギャラリーのスタイル */
-    .image-gallery {
-        width: 100%;
-        overflow-x: auto; /* 横スクロールを有効にする */
-        white-space: nowrap; /* 横スクロールするために改行を無効にする */
-    }
-    .image-gallery img {
-        width: 30%; /* 画像の幅 */
-        height: auto; /* 高さは自動で調整 */
-        margin-right: 2%; /* 画像の間隔 */
-    }
-    /* スマホ向けのレイアウト調整 */
-    @media (max-width: 800px) {
-        .container {
-            display: block; /* 1カラムにする */
-        }
-        .left, .right {
-            width: 100%; /* 幅を100%に */
-            margin-bottom: 20px; /* 余白を追加 */
-        }
-    }
     /* 隠しコンテンツのスタイル */
     .hidden-content {
-      display: none; /* 最初は隠す */
+      display: none;
       width: 100%;
       background-color: #fff700;
       color: white;
@@ -51,15 +26,28 @@
       box-sizing: border-box;
       font-size: 20px;
       position: relative;
-      z-index: 10; /* 他のコンテンツより上に表示 */
-      opacity: 0; /* 初期状態では透明 */
-      transform: translateY(-50px); /* 初期位置は画面外 */
-      transition: opacity 1s ease, transform 1s ease; /* なめらかなアニメーション */
+      z-index: 10;
+      opacity: 0;
+      transform: translateY(-50px);
+      transition: opacity 1s ease, transform 1s ease;
     }
-
-    /* メインコンテンツのスタイル */
+    
+    /* ギャラリー */
+    .image-gallery {
+      width: 100%;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    
+    .image-gallery img {
+      width: 30%;
+      height: auto;
+      margin-right: 2%;
+    }
+    
+    /* メインコンテンツ */
     .main-content {
-      height: 100vh; /* 画面全体を表示 */
+      height: 100vh;
       background-color: #f0f0f0;
       padding: 20px;
       font-size: 24px;
@@ -68,24 +56,13 @@
       align-items: center;
       text-align: center;
     }
-    /* 他のコンテンツスタイル */
-    .additional-content {
-      padding: 1px;
-      background-color: #fff;
-      border-top: 2px solid #ccc;
-    }
-</style>
-</body>
+    
+  </style>
 </head>
 
-
-
-<!-- ここからWebページの本編 -->
-<head>
-    <meta name="google-site-verification" content="1gm9hmOIxzmMj_i6514FsR_E0PMRkEVM_IZVokq9-4I" />
-</head>
 <body style="background-color: #ffffff;">
 
+  <div>
     <img src="pic and mov/cicling/gatake_kouyou.jpg" alt="ヘッダー写真" style="width: 100%; height: auto;"> 
 
 
@@ -165,73 +142,57 @@
         <a href= "https://rpubs.com/Ymgc_Kerorin" target="_blank">RPubs</a>  
     </p>
     </font>
-
-    <img src="pic and mov/cicling/header.png" alt="ヘッダー写真" style="width: 100%; height: auto;"> 
-
+  </div>
 
 
-    <!------------------------ うまく表示するための設計 ------------------------>
+
+
+
   <script>
-    let scrollTimer;
-    let scrollStartPosition = 0;
-    let isScrollingUp = false;
-    let scrollDuration = 0;
-    const requiredScrollDuration = 3000; // 3秒間のスクロール時間
-    let isContentVisible = false; // 隠しコンテンツが表示されたかどうかのフラグ
-    let hiddenContentCount = 0; // 追加された隠しコンテンツの数
+    let lastScrollTime = 0; // 最後のスクロール時刻
+    let lastScrollY = 0; // 最後のスクロール位置
+    const requiredScrollSpeed = 15; // スクロール速度のしきい値 (px/ms)
+    let isContentVisible = false;
 
-    // 初期画面でのスクロール位置を設定
-    window.addEventListener('load', () => {
-      scrollStartPosition = window.scrollY;
-    });
-
-    // スクロールイベントで上方向のスクロール継続を検知
+    // スクロールイベントリスナー
     window.addEventListener('scroll', () => {
-      const currentScrollPosition = window.scrollY;
-      
-      // 上方向スクロールが検知された場合
-      if (currentScrollPosition < scrollStartPosition) {
-        if (!isScrollingUp && !isContentVisible) {
-          // 初めて上方向のスクロールを開始した場合タイマーを開始
-          isScrollingUp = true;
-          scrollDuration = 0;
-          scrollTimer = setInterval(() => {
-            scrollDuration += 100; // 100msずつ加算
-            
-            // 3秒間経過したら隠れたコンテンツを表示
-            if (scrollDuration >= requiredScrollDuration) {
-              // 新しい隠しコンテンツをページの上に追加
-              const newContent = document.createElement('div');
-              newContent.className = 'hidden-content';
-              newContent.innerHTML = `
-                <div style="text-align: center; font-family: 'Caveat', cursive;">
-                  <p></p>
-                  <a href="https://ymgc19.github.io/montagnes" target="_blank" style="color: black; text-decoration: underline; font-weight: bold;">
-                    Les montagnes à découvrir à vélo</a>
-                </div>
-              `;
-              document.body.insertBefore(newContent, document.body.firstChild); // ページの上に追加
-              newContent.style.display = 'block';  // 新しいコンテンツを表示
-              setTimeout(() => {
-                // 1秒後にアニメーションを開始
-                newContent.style.opacity = '1';
-                newContent.style.transform = 'translateY(0)';
-              }, 10);
-              hiddenContentCount++; // 追加された隠しコンテンツのカウントを増やす
-              isContentVisible = true; // コンテンツ表示フラグを立てる
-              clearInterval(scrollTimer); // タイマー停止
-            }
-          }, 100);
+      const currentScrollY = window.scrollY;
+      const currentTime = new Date().getTime();
+      const timeDiff = currentTime - lastScrollTime; // 時間差 (ms)
+      const scrollDiff = currentScrollY - lastScrollY; // スクロール差 (px)
+
+      if (timeDiff > 0) {
+        const scrollSpeed = Math.abs(scrollDiff) / timeDiff; // スクロール速度 (px/ms)
+
+        // 高速スクロールを検出
+        if (scrollSpeed > requiredScrollSpeed && !isContentVisible) {
+          // 新しい隠しコンテンツをページの上に追加
+          const newContent = document.createElement('div');
+          newContent.className = 'hidden-content';
+          newContent.innerHTML = `
+            <div style="text-align: center; font-family: 'Caveat', cursive;">
+              <p></p>
+              <a href="https://ymgc19.github.io/montagnes" target="_blank" style="color: black; text-decoration: underline; font-weight: bold;">
+                Les montagnes à découvrir à vélo</a>
+            </div>
+          `;
+          document.body.insertBefore(newContent, document.body.firstChild); // ページの上に追加
+          newContent.style.display = 'block';  // 新しいコンテンツを表示
+          setTimeout(() => {
+            // 1秒後にアニメーションを開始
+            newContent.style.opacity = '1';
+            newContent.style.transform = 'translateY(0)';
+          }, 10);
+          isContentVisible = true;
         }
-      } else {
-        // 上方向のスクロールが停止した場合または逆方向の場合
-        isScrollingUp = false;
-        clearInterval(scrollTimer); // タイマーをリセット
       }
-      
-      // スクロール位置を更新
-      scrollStartPosition = currentScrollPosition;
+
+      // スクロール位置と時間を更新
+      lastScrollY = currentScrollY;
+      lastScrollTime = currentTime;
     });
   </script>
+
 </body>
+
 </html>
