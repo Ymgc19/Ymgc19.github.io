@@ -9,10 +9,17 @@
   <style>
     body {
       color: #00d5ff;
-      margin: 0 5%;
+      margin: 0 20%;
       padding: 0;
       line-height: 1.6;
     }
+
+    @media screen and (max-width: 768px) {
+      body {
+        margin: 0 5%; /* スマホでは margin を 0 に */
+      }
+    }
+
     a {
       color: #f2ff00;
     }
@@ -146,11 +153,10 @@
     <p></p>
     <h2>［アクセス解析］</h2>
     <p>Google Analyticsのデータを取得し，そのデータを可視化しています．</p>
-    <h3>訪問者数</h3>
+    <h3>- このページへの訪問者数</h3>
     <iframe src="html_figures/personal.html" width="100%" style="border:none;"></iframe>
 
-    <p>私の<b><a href= "https://researchmap.jp/kerokero" target="_blank">researchmap</a></b>にアクセスしてくれた人の属性を</p>
-    <h3>- アクセス数</h3>
+    <h3>- 私の<b><a href= "https://researchmap.jp/kerokero" target="_blank">researchmap</a></b>へのアクセス数</h3>
     <iframe src="html_figures/researchmap.html" width="100%" style="border:none;"></iframe>
     <h3>- researchmapへのアクセスの空間的な分布</h3>
     <p>こちらでは市区町村レベルのデータが取得できているが，プライバシー保護の観点から，各都道府県庁所在地を中心に可視化している．ただし石川県だけは七尾市を中心にしている．</p>
