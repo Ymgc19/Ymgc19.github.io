@@ -40,7 +40,7 @@
         研究の効率を上げるためには，何かしらの機構があった方が良いと思います．<br>
         &emsp;そこで生み出されたのが<a href= "https://github.com/Ymgc19/simplecensus">{simplecensus}</a>というRパッケージです！　
         これさえあれば，国勢調査の一括取得，変数の整形をサクッとシンプルに実行できます．
-        現在は2015年データにしか対応していません．今後他の年のデータやメッシュの取得も実装する予定です．
+        現在は2015年と2020年データにしか対応していません．今後他の年のデータやメッシュの取得も実装する予定です．
     </p>
 
 <p></p>
@@ -56,77 +56,25 @@
     </b></code></pre>
 
     <p>
-        では，ためしに宮城県の統計データ（2015）を読み込んでみましょう．
-        使う関数は<code><b>simplecensus::smc.read_census_2015()</b></code>です．
+        ためしに宮城県のデータ（2015）を読み込んでみましょう．
+        使う関数は<code><b>simplecensus::smc.get_census_2015()</b></code>です．
         引数にはデータを取得したい<a href= "https://nlftp.mlit.go.jp/ksj/gml/codelist/PrefCd.html">都道府県のコード</a>を指定してください．
         今回は宮城県データを取得したいので，引数には宮城県のコードである<code><b>4</b></code>を入れます．<br>
-        便宜的に<code><b>KEY_CODE</b></code>を数値変数に変換します．
-        あとから<code><b>KEY_CODE</b></code>をベースにして地理データと結合するときに，データの型が揃っていないとうまくいかないためです．
+        以下のコードを実行するだけで，宮城県の2015年統計データと地理データが結合されたものが生成できます．また，変数の整形，割合変数の作成なども実行できます．たったの1行で！
     </p>
 
     <pre><code><b>
-        # 宮城県の統計データを取得する
-        miyagi_census <- simplecensus::smc.read_census_2015(4) %>% 
-            mutate(KEY_CODE = as.numeric(KEY_CODE))
-        miyagi_census %>% glimpse() # 確認
+        # 宮城県のデータを取得して整形
+        miyagi <- smc.get_census_2020(4)
     </b></code></pre>
 
     <p>
-        次に，宮城県のシェープファイルを読み込んでみましょう．
-        使う関数は<code><b>simplecensus::smc.read_census_shp()</b></code>です．
-        こちらも引数には取得したい都道府県のコードを指定してください．今回は例によって<code><b>4</b></code>です．
-    </p>
-
-    <pre><code><b>
-        # 宮城県のシェープファイルを取得する
-        miyagi_shp <- simplecensus::smc.read_census_shp(4)
-        miyagi_shp %>% glimpse() # 確認
-    </b></code></pre>
-
-    <p>
-        取得したデータを<code><b>KEY_CODE</b></code>を基準にして結合します．<code><b>dplyr::left_join()</b></code>などを使うと良いでしょう．
-    </p>
-
-    <pre><code><b>
-        # 統計データと地理情報を結合
-        miyagi_census_shp <- left_join(miyagi_shp, miyagi_census)
-        miyagi_census_shp %>% glimpse() # 確認
-    </b></code></pre>
-
-    <p>
-        ここまでの操作で，統計データと地理データがひとつになったデータフレームを作ることができました．<br>
-        しかし，国勢調査の統計データはこのままだと，あまり分析には使い勝手がよくありません．
-        変数を整形する必要があります．そこで用いるのが<code><b>simplecensus::smc.create_variables_2015()</b></code>関数です．
-        変数を数値変数に変換すると同時に，<code><b>"-"</b></code>を<code><b>0</b></code>にします．
-        また，この関数では人口密度も計算しています．その際にそれぞれのポリゴンの面積を算出しています．
-        そのため，統計情報と地理情報を結合した後のデータフレームではないとエラーになります．ご注意ください．
-    </p>
-
-    <pre><code><b>
-        # 変数を整形
-        miyagi_census_shp <- miyagi_census_shp %>% 
-            simplecensus::smc.create_variables_2015()
-        miyagi_census_shp %>% glimpse() # 確認
-    </b></code></pre>
-
-    <p>
-        さらに，変数を割合に変換する処理を<code><b>simplecensus::smc.convert_percentage_vars_2015()</b></code>で実行できます．
-    </p>
-
-    <pre><code><b>
-        # 割合変数を作成
-        miyagi_census_shp <- miyagi_census_shp %>% 
-            simplecensus::smc.convert_percentage_vars_2015()
-        miyagi_census_shp %>% glimpse() # 確認
-    </b></code></pre>
-
-    <p>
-        最後に変数を描画してみましょう！　ここでは「1人暮らし世帯の割合」を描画します．
+        ためしに変数を描画してみましょう！　ここでは「1人暮らし世帯の割合」を描画します．
     </p>
 
     <pre><code><b>
         # 1人暮らし世帯の割合
-        miyagi_census_shp %>% 
+        miyagi %>% 
           ggplot() +
           geom_sf(
             aes(fill = smc.per.households1),
@@ -152,6 +100,38 @@
                 )
     </b></code></pre>
     <iframe src="memo_images/memo_simplecensus/miyagi_alone.html" width="100%" style="border:none; height:60vh;"></iframe>
+
+
+
+
+
+
+
+    <p></p>
+    <h2><b>［細々とした関数］</b></h2>
+
+
+    <li><b><span style="color:#ff8f86;">統計データだけを読み込みたい場合</span></b><br>
+        <code><b>simplecensus::smc.read_census_2015()</b></code>や<code><b>simplecensus::smc.read_census_2020()</b></code>を使ってください．
+        引数にはデータを取得したい都道府県のコードを指定してください．
+    </li>
+
+    <li><b><span style="color:#ff8f86;">シェープファイルだけを読み込みたい場合</sye-pufairu></span></b><br>
+        <code><b>simplecensus::smc.read_census_shp()</b></code>の引数に取得したい都道府県のコードを指定してください．
+    </li>
+
+    <li><b><span style="color:#ff8f86;">変数を数値型に変換したい場合</span></b><br>
+        <code><b>simplecensus::smc.create_variables_2015()</b></code>や<code><b>simplecensus::smc.create_variables_2020()</b></code>関数を使用してください．
+        これら関数は変数を数値変数に変換すると同時に，<code><b>"-"</b></code>を<code><b>0</b></code>にします．
+        また，この関数では人口密度も計算しています．その際にそれぞれのポリゴンの面積を算出しています．
+        そのため，統計情報と地理情報を結合した後のデータフレームではないとエラーになります．ご注意ください．
+    </li>
+
+    <li><b><span style="color:#ff8f86;">割合変数を作りたい場合</span></b><br>
+        <code><b>simplecensus::smc.convert_percentage_vars_2015()</b></code>で実行できます．
+        この関数により，たとえば，「1人暮らしの世帯数」という変数があったとして，その変数から「全世帯数のうち1人暮らしの世帯の割合」を作ります．
+    </li>
+
 
 <p></p>
     <h2><b>［変数名対応表］</b></h2>
