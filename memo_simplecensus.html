@@ -139,6 +139,20 @@
 
     <img src="memo_images/memo_simplecensus/miyagi_alone.png" alt="独居世帯割合" style="width: 100%; height: auto;"> 
 
+    <p>ちなみに<code><b>mapview::mapview()</b></code>を使うとインタラクティブな可視化も可能です！　
+    ぜひグリグリ触ってみてください！　やはり仙台の中心の方は1人暮らし世帯が多いんですね．</p>
+    <pre><code><b>
+        library(mapview)
+        library(leafpop)
+        mapview(miyagi_census_shp, 
+                zcol = "smc.per.households1",
+                lwd = .025,
+                col.regions=rev(RColorBrewer::brewer.pal(n=8,name="Spectral")),
+                popup=popupTable(miyagi_census_shp[,"smc.per.households1"])
+                )
+    </b></code></pre>
+    <iframe src="memo_images/memo_simplecensus/miyagi_alone.html" width="100%" style="border:none; height:60vh;"></iframe>
+
 <p></p>
     <h2><b>［変数名対応表］</b></h2>
     <li>smc.AREA: 面積（m^2）</li>
