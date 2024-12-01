@@ -43,8 +43,7 @@
         現在は2015年データにしか対応していません．今後他の年のデータやメッシュの取得も実装する予定です．
     </p>
 
-
-
+<p></p>
 
     <h2><b>［基本的な使い方］</b></h2>
     <p>&emsp;{simplecensus}は私のGithubからインストールできます．インストールして読み込むコードは以下です．同時に依存する他のパッケージも読み込んでおきましょう．</p>
@@ -140,4 +139,73 @@
 
     <img src="memo_images/memo_simplecensus/miyagi_alone.png" alt="独居世帯割合" style="width: 100%; height: auto;"> 
 
+<p></p>
+    <h2><b>［変数名対応表］</b></h2>
+    <li>smc.AREA: 面積（m^2）</li>
+    <li>smc.population: 人口（人）</li>
+    <li>smc.population_density: 人口密度（人/m^2）</li>
+    <li>smc.population_male: 男性人口（人）</li>
+    <li>smc.population_female: 女性人口（人）</li>
+    <li>smc.population{m}_{n}: m歳-n歳人口（人）</li>
+    <li>smc.population_male{m}_{n}: 男性m歳-n歳人口（人）</li>
+    <li>smc.population_female{m}_{n}: 女性m歳-n歳人口（人）</li>
+    <li>smc.households: 世帯数（世帯）</li>
+    <li>smc.households{n}: n人暮らし世帯数数</li>
+    <li>smc.population_per_households: 世帯あたりの平均人数（人）</li>
+    <li>smc.households_relatives: 親族のみの世帯数（世帯）</li>
+    <li>smc.households_core: 核家族世帯数（世帯）</li>
+    <li>smc.households_couple: 核家族世帯数のうち夫婦のみ世帯数（世帯）</li>
+    <li>smc.households_couple_children: 核家族世帯数のうち夫婦と子供からなる世帯数（世帯）</li>
+    <li>smc.households_under_6: 6歳未満の世帯員がいる世帯数（世帯）</li>
+    <li>smc.households_under_18: 18歳未満の世帯員がいる世帯数（世帯）</li>
+    <li>smc.households_over_65: 65歳以上の世帯員がいる世帯数（世帯）</li>
+    <li>smc.households_own: 持ち家に住む世帯数（世帯）</li>
+    <li>smc.households_rent: 民営借家に住む世帯数（世帯）</li>
+    <li>smc.households_detatched: 一戸建て世帯数（世帯）</li>
+    <li>smc.households_tenement: 長屋世帯数（世帯）</li>
+    <li>smc.households_communal{m}_{n}: {m}-{n}階建共同住宅世帯数（世帯）</li>
+    <li>smc.worker_15: 産業別１５歳以上就業者</li>
+    <li>smc.industry_A: 農業・林業従事者数（人）</li>
+    <li>smc.industry_B: 漁業従事者数（人）</li>
+    <li>smc.industry_C: 鉱業、採石業、砂利採取業従事者数（人）</li>
+    <li>smc.industry_D: 建設業従事者数（人）</li>
+    <li>smc.industry_E: 製造業従事者数（人）</li>
+    <li>smc.industry_F: 電気・ガス・熱供給・水道業従事者数（人）</li>
+    <li>smc.industry_G: 情報通信業従事者数（人）</li>
+    <li>smc.industry_H: 運輸業、郵便業従事者数（人）</li>
+    <li>smc.industry_I: 卸売業、小売業従事者数（人）</li>
+    <li>smc.industry_J: 金融業、保険業従事者数（人）</li>
+    <li>smc.industry_K: 不動産業、物品賃貸業 従事者数（人）</li>
+    <li>smc.industry_L: 学術研究、専門・技術サービス業従事者数（人）</li>
+    <li>smc.industry_M: 宿泊業、飲食サービス業従事者数（人）</li>
+    <li>smc.industry_N: 生活関連サービス業、娯楽業従事者数（人）</li>
+    <li>smc.industry_O: 教育、学習支援業従事者数（人）</li>
+    <li>smc.industry_P: 医療、福祉従事者数（人）</li>
+    <li>smc.industry_Q: 複合サービス事業従事者数（人）</li>
+    <li>smc.industry_R: サービス業（他に分類されないもの） 従事者数（人）</li>
+    <li>smc.industry_S: 公務（他に分類されるものを除く） 従事者数（人）</li>
+    <li>smc.industry_T: 分類不能の産業 従事者数（人）</li>
+    <li>smc.employer: 雇用者数（人）</li>
+    <li>smc.self_employed: 自営業者数（人）</li>
+    <li>smc.family_worker: 家族従業者（人）</li>
+    <li>smc.sector_all: 職業別就業者総数（人）</li>
+    <li>smc.sector_A: 管理的職業従事者数（人）</li>
+    <li>smc.sector_B: 専門的・技術的職業従事者数（人）</li>
+    <li>smc.sector_C: 事務従事者数（人）</li>
+    <li>smc.sector_D: 販売従事者数（人）</li>
+    <li>smc.sector_E: サービス職業従事者数（人）</li>
+    <li>smc.sector_F: 保安職業従事者数（人）</li>
+    <li>smc.sector_G: 農林漁業従事者数（人）</li>
+    <li>smc.sector_H: 生産工程従事者数（人）</li>
+    <li>smc.sector_I: 輸送・機械運転従事者数（人） </li>
+    <li>smc.sector_J: 建設・採掘従事者数（人） </li>
+    <li>smc.sector_K: 運搬・清掃・包装等従事者数（人） </li>
+    <li>smc.sector_L: 分類不能の職業数（人）</li>
+    <li>smc.primary: 農林漁業就業者世帯数（世帯）</li>
+    <li>smc.primary_other: 農林漁業・非農林漁業就業者混合世帯数（世帯）</li>
+    <li>smc.not_primary: 非農林漁業就業者世帯数（世帯）</li>
+    <li>smc.unemployed: 非就業者世帯（世帯）</li>
+    <li>smc.per.{hoge}: hogeがhogeの母数に占める割合</li>
+
+    <p></p>
 </body>
