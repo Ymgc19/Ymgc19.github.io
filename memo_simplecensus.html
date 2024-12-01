@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta name="google-site-verification" content="1gm9hmOIxzmMj_i6514FsR_E0PMRkEVM_IZVokq9-4I" />
+<!--    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>  -->
+<body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>&nbsp;HABITAT of RETICENT RIBBITTER by YAMAGUCHI Yuhei (山口侑平) - Tohoku University</title>
+<link rel="stylesheet" href = "common.css">
+</body>
+</head>
+
+
+<!-- ここからWebページの本編 -->
+<head>
+    <meta name="google-site-verification" content="1gm9hmOIxzmMj_i6514FsR_E0PMRkEVM_IZVokq9-4I" />
+    <font face="Times New Roman">
+    <header>
+    <center>
+        <h2><b><a href= "https://ymgc19.github.io/">《HABITAT of RETICENT RIBBITTER》</a></b></h2>
+    </center>
+    </header>
+    <img src="pic and mov/cicling/gatake_kouyou.jpg" alt="ヘッダー写真" style="width: 100%; height: auto;"> 
+</head>
+
+<body style="background-color: #3f3f3f;">
+    <h1><b>{simplecensys}の使い方</b></h1>
+    <h2>［はじめに］</h2>
+    <p>&emsp;日本では5年に1度，<b>国勢調査</b>が行われています．<br>
+        &emsp;国勢調査は悉皆調査なので，日本の社会状況を正確に知るためにとても有用なデータだと考えられます．
+        国民の年齢や世帯人数，居住形態，従事産業などは，社会科学者にとってはかなり重要な変数です．<br>
+        &emsp;しかし，現状として，国勢調査データは扱いにくい状況にあると感じています．
+        <a href= "https://www.e-stat.go.jp/">e-Stat</a>で
+        <a href= "https://www.e-stat.go.jp/gis/statmap-search?page=1&type=1&toukeiCode=00200521">国勢調査データ</a>は公開されていますが，これを手作業でひとつずつダウンロードし，結合していくのはとても骨が折れる作業です．
+        複雑骨折してしまいます．
+        国勢調査に限らず，政府統計は非常に有用なデータなのですが，なんせ取得や前処理がとても面倒です．
+        研究の効率を上げるためには，何かしらの機構があった方が良いと思います．<br>
+        &emsp;そこで生み出されたのが<a href= "https://github.com/Ymgc19/simplecensus">{simplecensus}</a>というRパッケージです！　
+        これさえあれば，国勢調査の一括取得，変数の整形をサクッとシンプルに実行できます．
+        現在は2015年データにしか対応していません．今後他の年のデータやメッシュの取得も実装する予定です．
+    </p>
+
+
+
+
+    <h2><b>［基本的な使い方］</b></h2>
+    <p>&emsp;{simplecensus}は私のGithubからインストールできます．インストールして読み込むコードは以下です．同時に依存する他のパッケージも読み込んでおきましょう．</p>
+    <pre><code><b>
+        # 必要なパッケージの読み込み
+        devtools::install_github("Ymgc19/simplecensus")
+        library(simplecensus)
+        library(tidyverse)
+        library(sf)
+    </b></code></pre>
+
+    <p>
+        では，ためしに宮城県の統計データ（2015）を読み込んでみましょう．
+        使う関数は<code><b>simplecensus::smc.read_census_2015()</b></code>です．
+        引数にはデータを取得したい<a href= "https://nlftp.mlit.go.jp/ksj/gml/codelist/PrefCd.html">都道府県のコード</a>を指定してください．
+        今回は宮城県データを取得したいので，引数には宮城県のコードである<code><b>4</b></code>を入れます．<br>
+        便宜的に<code><b>KEY_CODE</b></code>を数値変数に変換します．
+        あとから<code><b>KEY_CODE</b></code>をベースにして地理データと結合するときに，データの型が揃っていないとうまくいかないためです．
+    </p>
+
+    <pre><code><b>
+        # 宮城県の統計データを取得する
+        miyagi_census <- simplecensus::smc.read_census_2015(4) %>% 
+            mutate(KEY_CODE = as.numeric(KEY_CODE))
+        miyagi_census %>% glimpse() # 確認
+    </b></code></pre>
+
+    <p>
+        次に，宮城県のシェープファイルを読み込んでみましょう．
+        使う関数は<code><b>simplecensus::smc.read_census_shp()</b></code>です．
+        こちらも引数には取得したい都道府県のコードを指定してください．今回は例によって<code><b>4</b></code>です．
+    </p>
+
+    <pre><code><b>
+        # 宮城県のシェープファイルを取得する
+        miyagi_shp <- simplecensus::smc.read_census_shp(4)
+        miyagi_shp %>% glimpse() # 確認
+    </b></code></pre>
+
+    <p>
+        取得したデータを<code><b>KEY_CODE</b></code>を基準にして結合します．<code><b>dplyr::left_join()</b></code>などを使うと良いでしょう．
+    </p>
+
+    <pre><code><b>
+        # 統計データと地理情報を結合
+        miyagi_census_shp <- left_join(miyagi_shp, miyagi_census)
+        miyagi_census_shp %>% glimpse() # 確認
+    </b></code></pre>
+
+    <p>
+        ここまでの操作で，統計データと地理データがひとつになったデータフレームを作ることができました．<br>
+        しかし，国勢調査の統計データはこのままだと，あまり分析には使い勝手がよくありません．
+        変数を整形する必要があります．そこで用いるのが<code><b>simplecensus::smc.create_variables_2015()</b></code>関数です．
+        変数を数値変数に変換すると同時に，<code><b>"-"</b></code>を<code><b>0</b></code>にします．
+        また，この関数では人口密度も計算しています．その際にそれぞれのポリゴンの面積を算出しています．
+        そのため，統計情報と地理情報を結合した後のデータフレームではないとエラーになります．ご注意ください．
+    </p>
+
+    <pre><code><b>
+        # 変数を整形
+        miyagi_census_shp <- miyagi_census_shp %>% 
+            simplecensus::smc.create_variables_2015()
+        miyagi_census_shp %>% glimpse() # 確認
+    </b></code></pre>
+
+    <p>
+        さらに，変数を割合に変換する処理を<code><b>simplecensus::smc.convert_percentage_vars_2015()</b></code>で実行できます．
+    </p>
+
+    <pre><code><b>
+        # 割合変数を作成
+        miyagi_census_shp <- miyagi_census_shp %>% 
+            simplecensus::smc.convert_percentage_vars_2015()
+        miyagi_census_shp %>% glimpse() # 確認
+    </b></code></pre>
+
+    <p>
+        最後に変数を描画してみましょう！　ここでは「1人暮らし世帯の割合」を描画します．
+    </p>
+
+    <pre><code><b>
+        # 1人暮らし世帯の割合
+        miyagi_census_shp %>% 
+          ggplot() +
+          geom_sf(
+            aes(fill = smc.per.households1),
+            color = NA
+          ) +
+          scale_fill_gradient(low = "turquoise", high = "tomato") +
+          labs(fill = "") +
+          theme_minimal()
+    </b></code></pre>
+
+    <img src="memo_images/memo_simplecensus/miyagi_alone.png" alt="独居世帯割合" style="width: 100%; height: auto;"> 
+
+</body>
