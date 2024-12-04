@@ -23,7 +23,7 @@
         <h2><b><a href= "https://ymgc19.github.io/">《HABITAT of RETICENT RIBBITTER》</a></b></h2>
     </center>
     </header>
-    <img src="memo_images/memo_simplecensus/simplecensus_header.png" alt="ヘッダー写真" style="width: 100%; height: auto;"> 
+    <img src="memo_images/memo_ohagatamura/ohgata_header.png" alt="ヘッダー写真" style="width: 100%; height: auto;"> 
 </head>
 
 
@@ -31,10 +31,10 @@
 <body style="background-color: #3f3f3f;">
     <h1><b>秋田県の大潟村が気になります！</b></h1>
     <p>
-        &emsp;秋田県の<a href = "https://www.vill.ogata.akita.jp/">大潟村</a>って，魅力的ですよねぇ．すごく好きです．行ったことないけど．行ってみたい．すごく．<br>
-        &emsp;大潟村は，もともと八郎潟という湖沼だった場所を干拓して作られた地域らしいです．干拓される前の八郎潟は，琵琶湖に次いで日本で2番目に大きな湖だったそうです．
+        &emsp;秋田県の<a href = "https://www.vill.ogata.akita.jp/" target="_blank">大潟村</a>って，魅力的ですよねぇ．すごく好きです．行ったことないけど．行ってみたい．すごく．<br>
+        &emsp;水路に囲まれている場所が大潟村です．なんかヤバくないですか．凄すぎます！　RPGの世界観って感じですよね．独立国家っぽさもありますし．すごく，いい！
+        大潟村は，もともと八郎潟という湖沼だった場所を干拓して作られた地域らしいです．干拓される前の八郎潟は，琵琶湖に次いで日本で2番目に大きな湖だったそうです．
         もともとは魚がたくさん獲れる場所だったようですが，干拓された現在は陸地の大部分が水田となっていることが航空写真から見てとれます．
-        水路に囲まれている場所が大潟村です．なんかヤバくないですか．凄すぎます！　RPGの世界観って感じですよね．独立国家っぽさもありますし．すごく，いい！
     </p>
 
         <img src="memo_images/memo_ohagatamura/ohgata_map.png" alt="大潟村" style="width: 100%; height: auto;"> 
@@ -53,11 +53,76 @@
     <li>衛星画像を取得する（GEE; Google Earth Engine）</li>
     <li>衛星画像を可視化（R）</li>
     <li>適当な閾値に基づいた耕作状況のマッピング（R）</li>
-    &emsp;GEEでデータをエクスポートし，それをRで分析するといった感じです．
+    &emsp;GEEでデータをエクスポートし，それをRで分析するといった感じです．<b>コードはGithubにて共有</b>しようと思います．
     </p>
 
     <h2>［GEEでデータ取得］</h2>
+    <p>    &emsp;Sentinel-1のデータを取得します．
+        <a href = "https://browser.dataspace.copernicus.eu/?zoom=11&lat=37.19365&lng=137.0037&themeId=DEFAULT-THEME&visualizationUrl=https%3A%2F%2Fsh.dataspace.copernicus.eu%2Fogc%2Fwms%2Fa91f72b5-f393-4320-bc0f-990129bd9e63&datasetId=S2_L2A_CDAS&fromTime=2024-06-03T00%3A00%3A00.000Z&toTime=2024-06-03T23%3A59%3A59.999Z&layerId=1_TRUE_COLOR&demSource3D=%22MAPZEN%22&cloudCoverage=30&dateMode=SINGLE" target="_blank">Copernicus Browser</a>からデータをダウンロードすることも可能ですが，
+        今回は<a href = "">GEE; Google Earth Engine</a>を使います．取得するデータは，以下の2つです．
+        <li>5/1から5/30までの偏波VHの平均値から3/15から4/1までの偏波VHを引いたもの．</li>
+        <li>5/1から5/30までの偏波VHの平均値</li>
+        データは2017年から2024年までのものを取得します．それぞれ下降軌道のものに限定しました．
+        分解能は10mです．ムーア近傍のピクセルの平均値を自ゾーンの値にするという処理を施しました．<br>
+        &emsp;GEEの操作画面はこんな感じです（コードはGithub）．2024年5月の後方散乱（偏波VH）を表示しています．
+        大潟村の田園地帯は青色になっています．
+        海と同じ色ですね．後方散乱が海と同じ水準になっているためです．
+        つまり，水田には水が張られています．
+        水が張られている水田はきっと耕作が行われるはずです．
+        かなり単純な考え方ですが，この後方散乱の度合いに適切な閾値を設定すれば，耕作地と非耕作地を判別できそうです．
+    </p>
+    <img src="memo_images/memo_ohagatamura/gee.png" alt="GEE画面" style="width: 100%; height: auto;"> 
+    <p>
+        &emsp;データはいったんGoogle Driveに落とし，それを自分のPCにダウンロードするという方式をとっています．
+        Google Driveと自分のPCを同期させておくと，結構便利なのでオススメです．
+    </p>
+
+    <h2>［Rで可視化］</h2>
+    <p>
+        &emsp;大潟村の水田ごとの後方散乱の平均値を算出し，それを可視化します．<br>
+        &emsp;水田ごとの後方散乱の平均値を計算する際に，<a href = "https://www.maff.go.jp/j/tokei/porigon/hudeporidl.html" target="_blank">筆ポリゴン</a>を使用しました．
+        筆ポリゴンは日本全国の水田や畑の形状をデータ化したものです．今回は水田のデータだけを抽出して使いました．<br>
+        &emsp;Rには<a href = "https://github.com/isciences/exactextractr" target="_blank"><b>{exactextractr}</b></a>という最高のパッケージが存在しています．
+        これを用いると簡単に水田ごとの後方散乱の平均を算出できます．<br>
+        &emsp;水田ごとの後方散乱の平均値を計算したものを可視化してみましょう．
+    </p>
+    <img src="memo_images/memo_ohagatamura/ohgata_vh" alt="VHの分布" style="width: 100%; height: auto;"> 
+    <p>
+        &emsp;水色になっている水田は後方散乱が小さく（水が張られていそう），赤色になっている水田は後方散乱が大きい（水が張られていなさそう）です．
+        候補散乱は-35が最小（もっとも水色），0が最大（もっとも赤色）として描画しています．
+        結構年毎にばらつきがある？<br>
+        &emsp;次に，5月の後方散乱と，3月下旬の後方散乱の差分を可視化してみましょう．
+    </p>
+    <img src="memo_images/memo_ohagatamura/ohgata_diff" alt="VHの差分" style="width: 100%; height: auto;"> 
+    <p>
+        &emsp;水色の地域ほど差分の値が小さいということを意味します．
+        この値が小さくなっているほど，3月から5月にかけて後方散乱が低下したというふうに考えられます．
+        つまり，水色っぽいほど水田に水が張られていそうだと考えられます．
+    </p>
+
+    <h2>［耕作状況の推定］</h2>
+    <p>
+        &emsp;では，耕作されているか，されていないかを推定してみましょう．<br>
+        &emsp;それっぽい閾値（判断基準）を定めます「閾値を下回っていれば耕作されている，上回っていたら耕作されていない」といったようなことをします．
+        本来であれば，フィールドワークなどをして実際の耕作状況を参照した上で閾値を設定するのが良いと思います．
+        しかし，今回はフィールドワークなどを行わず，私が過去に行った研究に基づいて値を設定しました．
+        明確な根拠を持って設定したものではない（機械学習などを行い，Ground Truthとのずれが小さくなるようチューニングしたものではない．なお．私が過去に行った研究では複数時点の衛星指標を入力として，DNNにより耕作地・非耕作地を判別しました）ことに注意してください，．<br>
+        &emsp;5月の偏波VHの閾値は「-20」とします．偏波NHの差分の閾値は「-8」とします．
+        この2つの閾値の両方を上回っているものを「非耕作地」として判断します．
+        あくまでも私が独断と偏見で決めたものなので，これが絶対的に正しいものでは決してありません．<br>
+        &emsp;結果を見てみましょう．
+    </p>
+    <img src="memo_images/memo_ohagatamura/ohgata_kousaku" alt="耕作状況の結果" style="width: 100%; height: auto;"> 
+
     
+
+
+
+
+
+
+
+
 
     <p style="text-align:center">
         Email: yuhei.yamaguchi.t1@dc.tohoku.ac.jp <br>
