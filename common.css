@@ -78,3 +78,14 @@ code {
     background-color: #124C6B; /* 背景色 */
     border-radius: 5px; /* 角丸 */
 }
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2列 */
+    gap: 10px; /* 画像間の隙間 */
+}
+.image-grid a img {
+    width: 100%; /* 画像を列幅に合わせる */
+    height: auto; /* 縦横比を維持 */
+    border: 1px solid #ccc; /* オプション：画像の枠線 */
+}
