@@ -82,7 +82,7 @@ code {
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2列 */
-    gap: 5%; /* 画像間の隙間 */
+    gap: 1%; /* 画像間の隙間 */
 }
 .image-grid a img {
     width: 100%; /* 画像を列幅に合わせる */
