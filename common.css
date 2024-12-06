@@ -63,8 +63,8 @@ header {
 
 /* コードブロック全体のスタイル */
 pre {
-    margin: 1em 0;
-    padding: 1%;
+    margin: 2%; /* 上下の外側余白を広げる */
+    padding: 2%; /* 内側余白を増やして余裕を持たせる */
     border-radius: 5px;
     background: #124C6B;
     color: #DEF190;
