@@ -49,11 +49,11 @@
     <h2><b>［基本的な使い方］</b></h2>
     <p>&emsp;{simplecensus}は私のGithubからインストールできます．インストールして読み込むコードは以下です．同時に依存する他のパッケージも読み込んでおきましょう．</p>
     <pre><code><b>
-        # 必要なパッケージの読み込み
-        devtools::install_github("Ymgc19/simplecensus")
-        library(simplecensus)
-        library(tidyverse)
-        library(sf)
+# 必要なパッケージの読み込み
+devtools::install_github("Ymgc19/simplecensus")
+library(simplecensus)
+library(tidyverse)
+library(sf)
     </b></code></pre>
 
     <p>
@@ -65,8 +65,8 @@
     </p>
 
     <pre><code><b>
-        # 宮城県のデータを取得して整形
-        miyagi <- smc.get_census_2020(4)
+# 宮城県のデータを取得して整形
+miyagi <- smc.get_census_2020(4)
     </b></code></pre>
 
     <p>
@@ -74,16 +74,16 @@
     </p>
 
     <pre><code><b>
-        # 1人暮らし世帯の割合
-        miyagi %>% 
-          ggplot() +
-          geom_sf(
-            aes(fill = smc.per.households1),
-            color = NA
-          ) +
-          scale_fill_gradient(low = "turquoise", high = "tomato") +
-          labs(fill = "") +
-          theme_minimal()
+# 1人暮らし世帯の割合
+miyagi %>% 
+    ggplot() +
+    geom_sf(
+        aes(fill = smc.per.households1),
+        color = NA
+    ) +
+    scale_fill_gradient(low = "turquoise", high = "tomato") +
+    labs(fill = "") +
+    theme_minimal()
     </b></code></pre>
 
     <img src="memo_images/memo_simplecensus/miyagi_alone.png" alt="独居世帯割合" style="width: 100%; height: auto;"> 
@@ -94,14 +94,14 @@
     </p>
     
     <pre><code><b>
-        library(mapview)
-        library(leafpop)
-        mapview(miyagi, 
-                zcol = "smc.per.households1",
-                lwd = .025,
-                col.regions=rev(RColorBrewer::brewer.pal(n=8,name="Spectral")),
-                popup=popupTable(miyagi_census_shp[,"smc.per.households1"])
-                )
+library(mapview)
+library(leafpop)
+mapview(miyagi, 
+        zcol = "smc.per.households1",
+        lwd = .025,
+        col.regions=rev(RColorBrewer::brewer.pal(n=8,name="Spectral")),
+        popup=popupTable(miyagi_census_shp[,"smc.per.households1"])
+        )
     </b></code></pre>
     <iframe src="memo_images/memo_simplecensus/miyagi_alone.html" width="100%" style="border:none; height:60vh;"></iframe>
 
