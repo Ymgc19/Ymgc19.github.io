@@ -34,12 +34,12 @@
         &emsp;国勢調査は悉皆調査なので，日本の社会状況を正確に知るためにとても有用なデータだと考えられます．
         国民の年齢や世帯人数，居住形態，従事産業などは，社会科学者にとってはかなり重要な変数です．<br>
         &emsp;しかし，現状として，国勢調査データは扱いにくい状況にあると感じています．
-        <a href= "https://www.e-stat.go.jp/">e-Stat</a>で
-        <a href= "https://www.e-stat.go.jp/gis/statmap-search?page=1&type=1&toukeiCode=00200521">国勢調査データ</a>は公開されていますが，これを手作業でひとつずつダウンロードし，結合していくのはとても骨が折れる作業です．
+        <a href= "https://www.e-stat.go.jp/" target="_blank">e-Stat</a>で
+        <a href= "https://www.e-stat.go.jp/gis/statmap-search?page=1&type=1&toukeiCode=00200521" target="_blank">国勢調査データ</a>は公開されていますが，これを手作業でひとつずつダウンロードし，結合していくのはとても骨が折れる作業です．
         複雑骨折してしまいます．
         国勢調査に限らず，政府統計は非常に有用なデータなのですが，なんせ取得や前処理がとても面倒です．
         研究の効率を上げるためには，何かしらの機構があった方が良いと思います．<br>
-        &emsp;そこで生み出されたのが<a href= "https://github.com/Ymgc19/simplecensus">{simplecensus}</a>というRパッケージです！　
+        &emsp;そこで生み出されたのが<a href= "https://github.com/Ymgc19/simplecensus" target="_blank">{simplecensus}</a>というRパッケージです！　
         これさえあれば，国勢調査の一括取得，変数の整形をサクッとシンプルに実行できます．
         現在は2015年と2020年データにしか対応していません．今後他の年のデータやメッシュの取得も実装する予定です．
     </p>
@@ -59,7 +59,7 @@ library(sf)
     <p>
         ためしに宮城県のデータ（2015）を読み込んでみましょう．
         使う関数は<code><b>simplecensus::smc.get_census_2015()</b></code>です．
-        引数にはデータを取得したい<a href= "https://nlftp.mlit.go.jp/ksj/gml/codelist/PrefCd.html">都道府県のコード</a>を指定してください．
+        引数にはデータを取得したい<a href= "https://nlftp.mlit.go.jp/ksj/gml/codelist/PrefCd.html" target="_blank">都道府県のコード</a>を指定してください．
         今回は宮城県データを取得したいので，引数には宮城県のコードである<code><b>4</b></code>を入れます．<br>
         以下のコードを実行するだけで，宮城県の2015年統計データと地理データが結合されたものが生成できます．また，変数の整形，割合変数の作成なども実行できます．たったの1行で！
     </p>
@@ -208,7 +208,7 @@ mapview(miyagi,
     <p></p>
 
     <h2>［謝辞］</h2>
-    <li><a href= "https://x.com/NONONOexe">kei</a>様より，このパッケージの改善点やアドバイスをいただきました．ありがとうございます！</li>
+    <li><a href= "https://x.com/NONONOexe" target="_blank">kei</a>様より，このパッケージの改善点やアドバイスをいただきました．ありがとうございます！</li>
  
     <p></p>
  

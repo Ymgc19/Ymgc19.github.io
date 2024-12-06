@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta name="google-site-verification" content="1gm9hmOIxzmMj_i6514FsR_E0PMRkEVM_IZVokq9-4I" />
+<!--    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>  -->
+<body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>&nbsp;HABITAT of RETICENT RIBBITTER by YAMAGUCHI Yuhei (山口侑平) - Tohoku University</title>
+<link rel="stylesheet" href = "common.css">
+</body>
+</head>
+
+
+<!-- ここからWebページの本編 -->
+<head>
+    <meta name="google-site-verification" content="1gm9hmOIxzmMj_i6514FsR_E0PMRkEVM_IZVokq9-4I" />
+    <font face="Times New Roman">
+    <header>
+    <center>
+        <h2><b><a href= "https://ymgc19.github.io/">《HABITAT of RETICENT RIBBITTER》</a></b></h2>
+    </center>
+    </header>
+    <img src="memo_images/memo_agribbit/memo_agribbit_header.png" alt="ヘッダー写真" style="width: 100%; height: auto;"> 
+</head>
+
+<body style="background-color: #3f3f3f;">
+    <h1><b>{agribit2}の使い方</b></h1>
+    <p>&emsp;<a href = "https://github.com/Ymgc19/agribbit2" target="_blank">{agribbit2}</a>は簡単に農林業センサスデータを取得するために開発されたR言語のパッケージです．</p>
+    <h2>［はじめに］</h2>
+    <p>
+        &emsp;<b><a href = "https://www.e-stat.go.jp/gis/statmap-search?page=1&type=1&toukeiCode=00500209" target="_blank">農林業センサス</a></b>は国勢調査同様，5年に1度行われている調査です．
+        農林業センサスは日本の農業の状況を把握するのに有用なデータなのですが，データの取得や整形が面倒なのが難点です．また欠損値も目立ちます．
+        {agribbit2}は農林業センサスデータ（シェープファイルも）の取得を自動化するとともに，ガウス過程による欠損値補完，変数整形を行うパッケージです．
+        これにより，農林業に関する研究の障壁が下がると嬉しいです．<br>
+        &emsp;なお{agribbit}という名称ですが，agricultureとribbitを重ねて命名しました．ribbitとは英語圏におけるカエルの鳴き声を表現する単語のようです．
+        日本でいうところの「ゲロゲロ」とか「ゲコゲコ」とかに当たるものです．カエル，好きなので．
+    </p>
+
+
+
+    <h2>［簡単な使い方］</h2>
+    &emsp;まずはpackageをinstallしましょう．
+    <pre><code><b>
+# installation
+devtools::install_github("Ymgc19/agribbit2")
+    </b></code></pre>
+
+    <p>
+    &emsp;石川県の農林業センサスデータを取得し，欠損値補完と変数の整形を行い，地図で描画するまでを紹介します．<br>
+    &emsp;農林業センサスの統計データを取得するには<code><b>agribbit2::agri.read_census_2020</b></code>とか<code><b>agribbit2::agri.read_census_2015</b></code>を使います．
+    引数には取得したい都道府県の，<a href= "https://nlftp.mlit.go.jp/ksj/gml/codelist/PrefCd.html" target="_blank">都道府県コード</a>を指定します．
+    今回は石川県のデータを取得したいので，石川県の都道府県コード<code><b>17</b></code>を指定します．
+    <pre><code><b>
+# 石川県の統計データを取得
+ishikawa_census <- agribbit2::agri.read_census_2020(17)
+ishikawa_census %>% glimpse() # 確認
+    </b></code></pre>
+
+    <p></p>
+    <p>
+        &emsp;次に，このデータフレームの重要な変数（個人的に重要だと思ったもの）の欠損値を補完します．その際にガウス過程回帰を用いました．
+        ガウス過程回帰は「入力が似ていれば出力も似る」という直感的な数学的背景があります．
+        欠損の少ない変数で組んだカーネル行列（地域間の性質の近さを計るもの）をもとにして，欠損値を予測します．
+        ガウス過程回帰の詳しい話は<a href = "https://www.kspub.co.jp/book/detail/1529267.html" target="_blank">『ガウス過程と機械学習』</a>を読んでください．私はこれを読んで学びました．
+    </p>
+    
+
+    </p>
+
+
+    <h2>［謝辞］</h2>
+    <p></p>
+ 
+    <p style="text-align:center">
+        Email: yuhei.yamaguchi.t1@dc.tohoku.ac.jp <br>
+        <a href= "https://x.com/iqqqiiiq" target="_blank">𝕏</a> &emsp;&emsp;
+        <a href= "https://instagram.com/iqqqiiiq" target="_blank">Instagram</a> &emsp;&emsp;
+        <a href= "https://github.com/Ymgc19" target="_blank">Github</a> &emsp;&emsp;
+        <a href= "https://rpubs.com/Ymgc_Kerorin" target="_blank">RPubs</a>  
+    </p>
+</body>
