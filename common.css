@@ -65,21 +65,25 @@ header {
 pre {
     margin: 2%; /* 上下の外側余白を広げる */
     padding: 2%; /* 内側余白を増やして余裕を持たせる */
-    border-radius: 5px;
-    background: #124C6B;
-    color: #DEF190;
-    max-width: 100%;
+    border-radius: 5px; /* 角丸 */
+    background: #124C6B; /* 背景色 */
+    color: #DEF190; /* テキスト色 */
+    max-width: 100%; /* 横幅をコンテナ内に制限 */
     font-size: 1em; /* 統一されたフォントサイズ */
-    white-space: pre-wrap; /* 折り返しを有効にする */
+    white-space: pre; /* 折り返さない */
+    overflow-x: auto; /* 水平方向のスクロールを有効にする */
+    overflow-y: hidden; /* 垂直方向のスクロールを無効化 */
 }
 
 /* コード内テキストのスタイル */
 code {
-    font-size: 1em;
-    font-weight: normal; /* 通常のコードスタイル */
-    background: #124C6B; /* 通常の背景色（必要なら） */
-    padding: 0.1em; /* 通常の内側余白 */
-    border-radius: 3px; /* 少し角丸にする */
+    font-size: 1em; /* 通常のフォントサイズ */
+    font-weight: normal; /* 通常のフォントウェイト */
+    background: transparent; /* 背景を透明にする */
+    background: #124C6B; /* 背景色 */
+    color: #DEF190; /* テキスト色 */
+    padding: 0; /* コード内で余白を取らない */
+    border-radius: 0; /* 角丸を無効化 */
 }
 
 /* 太字コード用 */
