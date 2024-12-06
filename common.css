@@ -67,7 +67,7 @@ pre {
     border-radius: 5px; /* 角丸 */
     background: #124C6B; /* 背景色 */
     color: #DEF190; /* 文字色 */
-    white-space: pre-wrap; /* はみ出たときに折り返す */
+/*    white-space: pre-wrap; /* はみ出たときに折り返す */
     max-width: 100%;
 }
 
