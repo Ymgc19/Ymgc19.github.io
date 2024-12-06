@@ -1,16 +1,16 @@
-地域,市区町村,アクティブ ユーザー,新規ユーザー数,エンゲージのあったセッション数,エンゲージメント率,エンゲージメントのあったセッション数（1 アクティブ ユーザーあたり）,アクティブ ユーザーあたりの平均エンゲージメント時間,イベント数,キーイベント,ユーザー キーイベント レート,合計収益
-Tokyo,(not set),19,18,8,0.4444444444444444,0.4444444444444444,13.722222222222221,63,0,0,0
-Miyagi,Sendai,6,5,9,0.6,1.8,74.8,134,0,0,0
-Aichi,Nagoya,1,1,1,1,1,22,11,0,0,0
-Central Luzon,Angeles,1,1,1,1,1,39,5,0,0,0
-Ehime,Matsuyama,1,1,1,1,1,40,5,0,0,0
-Hokkaido,Kitami,1,1,1,1,1,39,4,0,0,0
-Hokkaido,Otofuke,1,1,0,0,0,0,3,0,0,0
-Hyogo,Kobe,1,1,1,1,1,44,4,0,0,0
-Ishikawa,Kanazawa,1,1,1,1,1,15,8,0,0,0
-Kyoto,Kyoto,1,1,0,0,0,0,5,0,0,0
-North Carolina,Forest City,1,1,1,1,1,5,5,0,0,0
-Osaka,Ibaraki,1,1,1,1,1,84,5,0,0,0
-Shizuoka,Shizuoka,1,1,1,1,1,22,4,0,0,0
-Tokyo,Kita City,1,1,0,0,0,6,5,0,0,0
-Virginia,Ashburn,1,1,1,1,1,2,5,0,0,0
+地域,市区町村,アクティブ ユーザー
+Tokyo,(not set),24
+Miyagi,Sendai,6
+Aichi,Nagoya,1
+Central Luzon,Angeles,1
+Ehime,Matsuyama,1
+Hokkaido,Kitami,1
+Hokkaido,Otofuke,1
+Hyogo,Kobe,1
+Ishikawa,Kanazawa,1
+Kyoto,Kyoto,1
+North Carolina,Forest City,1
+Osaka,Ibaraki,1
+Shizuoka,Shizuoka,1
+Tokyo,Kita City,1
+Virginia,Ashburn,1
