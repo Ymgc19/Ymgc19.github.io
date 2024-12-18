@@ -1,25 +1,31 @@
-地域,市区町村,アクティブ ユーザー,新規ユーザー数,エンゲージのあったセッション数,エンゲージメント率,エンゲージメントのあったセッション数（1 アクティブ ユーザーあたり）,アクティブ ユーザーあたりの平均エンゲージメント時間,イベント数,キーイベント,ユーザー キーイベント レート,合計収益
-Tokyo,(not set),34,34,18,0.5,0.5294117647058824,16.352941176470587,136,0,0,0
-Miyagi,Sendai,8,8,18,0.6666666666666666,2.25,108.125,221,0,0,0
-Hyogo,Kobe,2,2,2,1,1,58.5,9,0,0,0
-North Carolina,Forest City,2,2,2,1,1,4,10,0,0,0
-Aichi,Nagoya,1,1,1,1,1,22,11,0,0,0
-Central Luzon,Angeles,1,1,1,1,1,39,5,0,0,0
-Chiba,Matsudo,1,1,0,0,0,0,3,0,0,0
-Ehime,Matsuyama,1,1,1,1,1,40,5,0,0,0
-England,London,1,1,1,1,1,62,9,0,0,0
+市区町村,地域,アクティブ ユーザー,新規ユーザー数,エンゲージのあったセッション数,エンゲージメント率,エンゲージメントのあったセッション数（1 アクティブ ユーザーあたり）,アクティブ ユーザーあたりの平均エンゲージメント時間,イベント数,キーイベント,ユーザー キーイベント レート,合計収益
+(not set),Tokyo,35,35,19,0.5135135135135135,0.5428571428571428,17.2,140,0,0,0
+Sendai,Miyagi,8,8,19,0.6785714285714286,2.375,109.75,225,0,0,0
+,Tokyo,2,1,0,0,0,30.5,6,0,0,0
+Forest City,North Carolina,2,2,2,1,1,4,10,0,0,0
+Kobe,Hyogo,2,2,2,1,1,58.5,9,0,0,0
+Altoona,Iowa,1,1,1,1,1,4,5,0,0,0
+Angeles,Central Luzon,1,1,1,1,1,39,5,0,0,0
+Ashburn,Virginia,1,1,1,1,1,2,5,0,0,0
+Chigasaki,Kanagawa,1,1,1,1,1,53,4,0,0,0
+Chofu,Tokyo,1,1,1,0.5,1,11,6,0,0,0
+Dublin,County Dublin,1,1,1,1,1,5,5,0,0,0
+Fuchu,Tokyo,1,1,0,0,0,1,4,0,0,0
+Fukuchiyama,Kyoto,1,1,0,0,0,7,5,0,0,0
 Fukuoka,Fukuoka,1,1,0,0,0,0,6,0,0,0
-Hokkaido,Kitami,1,1,1,1,1,39,4,0,0,0
-Hokkaido,Otofuke,1,1,0,0,0,0,3,0,0,0
-Iowa,Altoona,1,1,1,1,1,4,5,0,0,0
-Ishikawa,Kanazawa,1,1,1,1,1,15,8,0,0,0
-Kanagawa,Chigasaki,1,1,1,1,1,53,4,0,0,0
-Kyoto,Fukuchiyama,1,1,0,0,0,7,5,0,0,0
-Kyoto,Kyoto,1,1,0,0,0,0,5,0,0,0
-Osaka,Ibaraki,1,1,1,1,1,84,5,0,0,0
+Fukushima,Fukushima,1,1,0,0,0,0,4,0,0,0
+Higashihiroshima,Hiroshima,1,1,0,0,0,9,4,0,0,0
+Ibaraki,Osaka,1,1,1,1,1,84,5,0,0,0
+Kanazawa,Ishikawa,1,1,1,1,1,15,8,0,0,0
+Kita City,Tokyo,1,1,0,0,0,6,5,0,0,0
+Kitami,Hokkaido,1,1,1,1,1,39,4,0,0,0
+Kyoto,Kyoto,1,2,0,0,0,0,8,0,0,0
+London,England,1,1,1,1,1,62,9,0,0,0
+Matsudo,Chiba,1,1,0,0,0,0,3,0,0,0
+Matsuyama,Ehime,1,1,1,1,1,40,5,0,0,0
+Nagoya,Aichi,1,1,1,1,1,22,11,0,0,0
+Otofuke,Hokkaido,1,1,0,0,0,0,3,0,0,0
 Shizuoka,Shizuoka,1,1,1,1,1,22,4,0,0,0
+Takasaki,Gunma,1,1,1,1,1,15,4,0,0,0
 Tokushima,Tokushima,1,1,0,0,0,0,3,0,0,0
-Tokyo,Chofu,1,1,1,0.5,1,11,6,0,0,0
-Tokyo,Kita City,1,1,0,0,0,6,5,0,0,0
-Virginia,Ashburn,1,1,1,1,1,2,5,0,0,0
-Tochigi,Oyama,0,0,0,0,0,0,2,0,0,0
+Oyama,Tochigi,0,0,0,0,0,0,2,0,0,0
