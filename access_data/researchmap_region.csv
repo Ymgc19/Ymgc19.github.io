@@ -1,31 +1,53 @@
 市区町村,地域,アクティブ ユーザー,新規ユーザー数,エンゲージのあったセッション数,エンゲージメント率,エンゲージメントのあったセッション数（1 アクティブ ユーザーあたり）,アクティブ ユーザーあたりの平均エンゲージメント時間,イベント数,キーイベント,ユーザー キーイベント レート,合計収益
-(not set),Tokyo,35,35,19,0.5135135135135135,0.5428571428571428,17.2,140,0,0,0
+(not set),Tokyo,95,95,45,0.45918367346938777,0.47368421052631576,14.778947368421052,367,0,0,0
 Sendai,Miyagi,8,8,19,0.6785714285714286,2.375,109.75,225,0,0,0
-,Tokyo,2,1,0,0,0,30.5,6,0,0,0
+Osaka,Osaka,4,5,2,0.4,0.5,0,17,0,0,0
+Shinjuku City,Tokyo,4,4,1,0.25,0.25,0,14,0,0,0
+Kanazawa,Ishikawa,3,3,2,0.6666666666666666,0.6666666666666666,16.666666666666668,16,0,0,0
+,Tokyo,2,2,0,0,0,39,8,0,0,0
+Ashburn,Virginia,2,2,2,1,1,2,10,0,0,0
 Forest City,North Carolina,2,2,2,1,1,4,10,0,0,0
+Fuchu,Tokyo,2,2,0,0,0,0.5,7,0,0,0
+Fukuoka,Fukuoka,2,2,1,0.3333333333333333,0.5,20,11,0,0,0
 Kobe,Hyogo,2,2,2,1,1,58.5,9,0,0,0
+Kyoto,Kyoto,2,2,1,0.3333333333333333,0.5,10.5,10,0,0,0
+Saitama,Saitama,2,2,1,0.5,0.5,15,7,0,0,0
+Sapporo,Hokkaido,2,1,0,0,0,17,5,0,0,0
+Shibuya City,Tokyo,2,2,1,0.5,0.5,16.5,7,0,0,0
+Shizuoka,Shizuoka,2,2,2,1,1,27.5,9,0,0,0
+Tsukuba,Ibaraki,2,2,2,1,1,19,10,0,0,0
+(not set),(not set),1,1,0,0,0,0,3,0,0,0
 Altoona,Iowa,1,1,1,1,1,4,5,0,0,0
 Angeles,Central Luzon,1,1,1,1,1,39,5,0,0,0
-Ashburn,Virginia,1,1,1,1,1,2,5,0,0,0
+Chiba,Chiba,1,1,0,0,0,0,3,0,0,0
+Chicago,Illinois,1,1,0,0,0,0,3,0,0,0
 Chigasaki,Kanagawa,1,1,1,1,1,53,4,0,0,0
+Chiyoda City,Tokyo,1,1,0,0,0,28,4,0,0,0
 Chofu,Tokyo,1,1,1,0.5,1,11,6,0,0,0
+Dallas,Texas,1,1,0,0,0,0,3,0,0,0
 Dublin,County Dublin,1,1,1,1,1,5,5,0,0,0
-Fuchu,Tokyo,1,1,0,0,0,1,4,0,0,0
 Fukuchiyama,Kyoto,1,1,0,0,0,7,5,0,0,0
-Fukuoka,Fukuoka,1,1,0,0,0,0,6,0,0,0
-Fukushima,Fukushima,1,1,0,0,0,0,4,0,0,0
-Higashihiroshima,Hiroshima,1,1,0,0,0,9,4,0,0,0
+Fukushima,Fukushima,1,1,1,1,1,0,6,0,0,0
+Haarlem,North Holland,1,1,1,1,1,19,4,0,0,0
+Higashihiroshima,Hiroshima,1,1,1,1,1,10,5,0,0,0
+Hikone,Shiga,1,1,1,1,1,61,4,0,0,0
 Ibaraki,Osaka,1,1,1,1,1,84,5,0,0,0
-Kanazawa,Ishikawa,1,1,1,1,1,15,8,0,0,0
 Kita City,Tokyo,1,1,0,0,0,6,5,0,0,0
 Kitami,Hokkaido,1,1,1,1,1,39,4,0,0,0
-Kyoto,Kyoto,1,2,0,0,0,0,8,0,0,0
 London,England,1,1,1,1,1,62,9,0,0,0
+Lulea,Norrbotten County,1,1,1,1,1,7,5,0,0,0
 Matsudo,Chiba,1,1,0,0,0,0,3,0,0,0
 Matsuyama,Ehime,1,1,1,1,1,40,5,0,0,0
+Mitaka,Tokyo,1,1,0,0,0,0,3,0,0,0
+Mito,Ibaraki,1,1,1,1,1,52,4,0,0,0
+Nagasaki,Nagasaki,1,1,0,0,0,0,4,0,0,0
 Nagoya,Aichi,1,1,1,1,1,22,11,0,0,0
+Noda,Chiba,1,1,0,0,0,0,3,0,0,0
 Otofuke,Hokkaido,1,1,0,0,0,0,3,0,0,0
-Shizuoka,Shizuoka,1,1,1,1,1,22,4,0,0,0
+Shiso,Hyogo,1,1,1,1,1,21,4,0,0,0
 Takasaki,Gunma,1,1,1,1,1,15,4,0,0,0
 Tokushima,Tokushima,1,1,0,0,0,0,3,0,0,0
+Toyonaka,Osaka,1,1,1,1,1,2,7,0,0,0
+Yokohama,Kanagawa,1,1,1,1,1,25,8,0,0,0
+Zurich,Zurich,1,1,0,0,0,0,3,0,0,0
 Oyama,Tochigi,0,0,0,0,0,0,2,0,0,0
