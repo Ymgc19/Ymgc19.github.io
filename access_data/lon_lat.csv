@@ -1,71 +1,101 @@
-city,lat,lng
-(not set),35.680929, 139.763317
-Sendai,38.268050, 140.872263
-Nagoya,35.171006, 136.884076
-Angeles,15.146786, 120.588832
-Matsuyama,33.839181, 132.752986
-Kitami,43.804657, 143.896612
-Kobe,34.679953, 135.179160
-Kyoto,34.983675, 135.755119
-Forest City,35.333078, -81.869348
-Shizuoka,34.970857, 138.389014
-Sapporo,43.066870, 141.348747
-Ibaraki, 34.816346, 135.570299
-Kanazawa, 36.577459, 136.649866
-Ashburn, 39.033046, -77.483814
-Osaka, 34.700723, 135.495872
-Kita City, 35.763121, 139.730098
-Otofuke, 42.986220, 143.203042
-Oyama, 36.313756, 139.801148
-Fukuchiyama, 35.295034, 135.118416
-Yokkaichi, 34.963292, 136.628705
-Sagamihara, 35.571137, 139.372979
-Funabashi, 35.701405, 139.985525
-Chigasaki, 35.329838, 139.407017
-Altoona, 40.516904, -78.401975
-Chofu, 35.650656, 139.540192
-London, 51.502408, -0.148191
-Tokushima, 34.066015, 134.557724
-Fukuoka, 33.605016, 130.418027
-Matsudo, 35.787590, 139.903777
-Takasaki, 36.322092, 139.014462
-Dublin, 53.347678, -6.275081
-Fukushima, 37.760302, 140.467553
-Zurich, 47.377948, 8.536401
-Yokohama, 35.466485, 139.622311
-Toyonaka, 34.781123, 135.470243
-Shiso, 35.004272, 134.549866
-Noda, 35.954541, 139.875221
-Nagasaki, 32.751234, 129.869551
-Mito, 36.368403, 140.477324
-Mitaka, 35.702336, 139.560970
-Lulea, 65.583935, 22.166565
-Hikone, 35.272478, 136.262944
-Higashihiroshima, 34.429811, 132.743483
-Haarlem, 52.388441, 4.638942
-Dallas, 32.781282, -96.798480
-Chiyoda, 35.679953, 139.761522
-Chicago, 41.875683, -87.620098
-Chiba, 35.611972, 140.113636
-Tsukuba, 36.083161, 140.076591
-Shibuya City, 35.663466, 139.698127
-Saitama, 35.892965, 139.632322
-Fuchu, 35.669261, 139.477374
-Shinjuku City, 35.693776, 139.703742
-Setagaya City, 35.646513, 139.654110
-Sanda, 34.889085, 135.229900
-Ota City, 35.561518, 139.715587
-Niihama, 33.947623, 133.294719
-Neyagawa, 34.765647, 135.627629
-Kimitsu, 35.334222, 139.895208
-Kamakura, 35.318135, 139.551142
-Hammond, 30.506894, -90.462406
-Cambridge, 42.376566, -71.119571
-Minato City, 35.654709, 139.756085
-Taito City, 35.713604, 139.778102
-Setagaya City, 35.646576, 139.653977
-Prineville, 44.302976, -120.847139
-Minneapolis, 44.971647, -93.269193
-Kurashiki, 34.584771, 133.772092
-Akita, 39.719203, 140.104025
-Nanao, 37.042766, 136.967403
+pref,city,lat,lon
+(not set),(not set),35.680929, 139.763317
+Miyagi,Sendai,38.268050, 140.872263
+Aichi,Nagoya,35.171006, 136.884076
+Central Luzon,Angeles,15.146786, 120.588832
+Ehime,Matsuyama,33.839181, 132.752986
+Hokkaido,Kitami,43.804657, 143.896612
+Hyogo,Kobe,34.679953, 135.179160
+Kyoto,Kyoto,34.983675, 135.755119
+North Carolina,Forest City,35.333078, -81.869348
+Shizuoka,Shizuoka,34.970857, 138.389014
+Hokkaido,Sapporo,43.066870, 141.348747
+Osaka,Ibaraki, 34.816346, 135.570299
+Ishikawa,Kanazawa, 36.577459, 136.649866
+Virginia,Ashburn, 39.033046, -77.483814
+Osaka,Osaka, 34.700723, 135.495872
+Tokyo,Kita City, 35.763121, 139.730098
+Hokkaido,Otofuke, 42.986220, 143.203042
+Tochigi,Oyama, 36.313756, 139.801148
+Kyoto,Fukuchiyama, 35.295034, 135.118416
+Mie,Yokkaichi, 34.963292, 136.628705
+Kanagawa,Sagamihara, 35.571137, 139.372979
+Chiba,Funabashi, 35.701405, 139.985525
+Kanagawa,Chigasaki, 35.329838, 139.407017
+Iowa,Altoona, 40.516904, -78.401975
+Tokyo,Chofu, 35.650656, 139.540192
+England,London, 51.502408, -0.148191
+Tokushima,Tokushima, 34.066015, 134.557724
+Fukuoka,Fukuoka, 33.605016, 130.418027
+Chiba,Matsudo, 35.787590, 139.903777
+Gunma,Takasaki, 36.322092, 139.014462
+County Dublin,Dublin, 53.347678, -6.275081
+Fukushima,Fukushima, 37.760302, 140.467553
+Zurich,Zurich, 47.377948, 8.536401
+Kanagawa,Yokohama, 35.466485, 139.622311
+Osaka,Toyonaka, 34.781123, 135.470243
+Hyogo,Shiso, 35.004272, 134.549866
+Chiba,Noda, 35.954541, 139.875221
+Nagasaki,Nagasaki, 32.751234, 129.869551
+Ibaraki,Mito, 36.368403, 140.477324
+Tokyo,Mitaka, 35.702336, 139.560970
+Norrbotten County,Lulea, 65.583935, 22.166565
+Shiga,Hikone, 35.272478, 136.262944
+Hiroshima,Higashihiroshima, 34.429811, 132.743483
+North Holland,Haarlem, 52.388441, 4.638942
+Texas,Dallas, 32.781282, -96.798480
+Tokyo,Chiyoda City, 35.679953, 139.761522
+Illinois,Chicago, 41.875683, -87.620098
+Chiba,Chiba, 35.611972, 140.113636
+Ibaraki,Tsukuba, 36.083161, 140.076591
+Tokyo,Shibuya City, 35.663466, 139.698127
+Saitama,Saitama, 35.892965, 139.632322
+Tokyo,Fuchu, 35.669261, 139.477374
+Tokyo,Shinjuku City, 35.693776, 139.703742
+Tokyo,Setagaya City, 35.646513, 139.654110
+Hyogo,Sanda, 34.889085, 135.229900
+Tokyo,Ota City, 35.561518, 139.715587
+Ehime,Niihama, 33.947623, 133.294719
+Osaka,Neyagawa, 34.765647, 135.627629
+Chiba,Kimitsu, 35.334222, 139.895208
+Kanagawa,Kamakura, 35.318135, 139.551142
+Louisiana,Hammond, 30.506894, -90.462406
+Massachusetts,Cambridge, 42.376566, -71.119571
+Tokyo,Minato City, 35.654709, 139.756085
+Tokyo,Taito City, 35.713604, 139.778102
+Oregon,Prineville, 44.302976, -120.847139
+Minnesota,Minneapolis, 44.971647, -93.269193
+Okayama,Kurashiki, 34.584771, 133.772092
+Akita,Akita, 39.719203, 140.104025
+Ishikawa,Nanao, 37.042766, 136.967403
+California,Ridgecrest,35.622487, -117.669927
+Chiba,Kisarazu,35.381569, 139.925319
+Chiba,Urayasu,35.635371, 139.882794
+Chongqing,Chongqing,29.546863, 106.504408
+Fukui,Fukui,36.060401, 136.216417
+Fukuoka,Iizuka,33.627525, 130.691210
+Hiroshima,Hiroshima,34.397988, 132.475533
+Hyogo,Akashi,34.643378, 134.997487
+Ibaraki,Hitachi,36.546547, 140.411685
+Ibaraki,Kasumigaura,36.094416, 140.330636
+Iwate,Morioka,39.700753, 141.137256
+Kanagawa,Zama,35.480447, 139.401051
+Kochi,Kochi,33.558693, 133.531784
+Kyoto,Uji,34.890113, 135.800874
+Massachusetts,Boston,42.346497, -71.097072
+Nagano,Nagano,36.643584, 138.191652
+New York,Cobleskill,42.677727, -74.482984
+Niigata,Murakami,38.220269, 139.461914
+Okayama,Tsuyama,35.054101, 134.002955
+Osaka,Suita,34.759311, 135.516818
+Pays de la Loire,Les Sables-d'Olonne,46.501340, -1.778126
+Tochigi,Utsunomiya,36.558673, 139.899258
+Tokyo,(not set),
+Tokyo,Adachi City,35.774853, 139.803681
+Tokyo,Bunkyo City,35.707993, 139.752171
+Tokyo,Edogawa City,35.706730, 139.868664
+Tokyo,Katsushika City,35.743364, 139.847809
+Tokyo,Koto City,35.672581, 139.817300
+Tokyo,Meguro City,35.640825, 139.697979
+Tokyo,Shinagawa City,35.608923, 139.730630
+Tokyo,Suginami City,35.699273, 139.636607
