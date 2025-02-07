@@ -9,7 +9,6 @@
     <script src="https://unpkg.com/leaflet-omnivore/leaflet-omnivore.min.js"></script>
     <style>
         #map { height: 600px; }
-        .clicked { fill: orange !important; }
     </style>
 </head>
 
@@ -18,7 +17,7 @@
     <button onclick="downloadData()">データをダウンロード</button>
 
     <script>
-        const map = L.map("map").setView([35.0, 135.0], 10); // 初期座標を適宜変更
+        const map = L.map("map").setView([36.0, 136.0], 10); // 初期座標を適宜変更
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
 
         let clickedMeshes = [];
@@ -28,6 +27,9 @@
         .then(data => {
             L.geoJSON(data, {
                 onEachFeature: function (feature, layer) {
+                    // 初期状態で塗りつぶしなし（透明）
+                    layer.setStyle({ fillColor: "transparent", color: "black", weight: 0.5, fillOpacity: 0.5 });
+
                     layer.on("click", function () {
                         let key = feature.properties.KEY_CODE;  // メッシュの識別キー
                         if (clickedMeshes.includes(key)) {
@@ -35,13 +37,12 @@
                             clickedMeshes = clickedMeshes.filter(item => item !== key);
                             layer.setStyle({ fillColor: "transparent" });  // 塗りつぶしなし
                         } else {
-                            // 新たに選択する場合（royalblueに塗る）
+                            // 新たに選択する場合（青色に塗る）
                             clickedMeshes.push(key);
-                            layer.setStyle({ fillColor: "royalblue" });  // royalblueで塗りつぶし
+                            layer.setStyle({ fillColor: "royalblue" });  // 青色で塗りつぶし
                         }
                     });
-                },
-                style: { color: "black", weight: 0.5, fillOpacity: 0.5 }
+                }
             }).addTo(map);
         });
         
