@@ -24,21 +24,26 @@
         let clickedMeshes = [];
 
         fetch("MESH05436.geojson")
-            .then(response => response.json())
-            .then(data => {
-                L.geoJSON(data, {
-                    onEachFeature: function (feature, layer) {
-                        layer.on("click", function () {
-                            let key = feature.properties.KEY_CODE;  // メッシュの識別キー
-                            if (!clickedMeshes.includes(key)) {
-                                clickedMeshes.push(key);
-                                layer.setStyle({ fillColor: "orange" });
-                            }
-                        });
-                    },
-                    style: { color: "black", weight: .25, fillOpacity: 0.0 }
-                }).addTo(map);
-            });
+        .then(response => response.json())
+        .then(data => {
+            L.geoJSON(data, {
+                onEachFeature: function (feature, layer) {
+                    layer.on("click", function () {
+                        let key = feature.properties.KEY_CODE;  // メッシュの識別キー
+                        if (clickedMeshes.includes(key)) {
+                            // すでに選択されている場合、選択解除
+                            clickedMeshes = clickedMeshes.filter(item => item !== key);
+                            layer.setStyle({ fillColor: "transparent" });  // 塗りつぶしなし
+                        } else {
+                            // 新たに選択する場合
+                            clickedMeshes.push(key);
+                            layer.setStyle({ fillColor: "orange" });  // オレンジ色に塗りつぶし
+                        }
+                    });
+                },
+                style: { color: "black", weight: 0.5, fillOpacity: 0 }
+            }).addTo(map);
+        });
         
         // データダウンロード
         function downloadData() {
