@@ -31,17 +31,17 @@
                     layer.on("click", function () {
                         let key = feature.properties.KEY_CODE;  // メッシュの識別キー
                         if (clickedMeshes.includes(key)) {
-                            // すでに選択されている場合、選択解除
+                            // すでに選択されている場合、選択解除（透明に戻す）
                             clickedMeshes = clickedMeshes.filter(item => item !== key);
-                            layer.setStyle({ fillColor: "transparent", fillOpacity: .5 });  // 塗りつぶしなし
+                            layer.setStyle({ fillColor: "transparent" });  // 塗りつぶしなし
                         } else {
-                            // 新たに選択する場合
+                            // 新たに選択する場合（royalblueに塗る）
                             clickedMeshes.push(key);
-                            layer.setStyle({ fillColor: "royalblue", fillOpacity: .5 });  // オレンジ色に塗りつぶし
+                            layer.setStyle({ fillColor: "royalblue" });  // royalblueで塗りつぶし
                         }
                     });
                 },
-                style: { color: "black", weight: 0.5, fillOpacity: .5 }
+                style: { color: "black", weight: 0.5, fillOpacity: 0 }
             }).addTo(map);
         });
         
