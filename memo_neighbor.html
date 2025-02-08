@@ -3,95 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>国勢調査メッシュのクリック保存</title>
+    <title>Google Sheets API でデータ保存</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-omnivore/leaflet-omnivore.min.js"></script>
     <style>
         #map { height: 600px; }
     </style>
 </head>
-
-<script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-analytics.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-  
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-      apiKey: "AIzaSyDZhWNrOFE3bihNoc9tedNh5nDmAwNXKys",
-      authDomain: "neighbormesh-2c978.firebaseapp.com",
-      projectId: "neighbormesh-2c978",
-      storageBucket: "neighbormesh-2c978.firebasestorage.app",
-      messagingSenderId: "127840622469",
-      appId: "1:127840622469:web:488e1e0b69a4efb87096ec",
-      measurementId: "G-0RJNYJR881"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-</script>
-
 <body>
     <div id="map"></div>
-    <button onclick="downloadData()">データをダウンロード</button>
+    <button onclick="saveToGoogleSheets()">Google Sheets に保存</button>
 
     <script>
         const map = L.map("map").setView([36.5, 136.5], 10);
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
-    
+
         let clickedMeshes = [];
-        let layers = {};  // 各メッシュレイヤーを保存
-    
-        // 複数の GeoJSON ファイルを指定
-        const geojsonFiles = ["MESH05436.geojson"];
-    
-        function loadGeoJSON(fileName, layerName) {
-            return fetch(fileName)
-                .then(response => response.json())
-                .then(data => {
-                    const layer = L.geoJSON(data, {
-                        onEachFeature: function (feature, layer) {
-                            layer.setStyle({ fillColor: "transparent", color: "black", weight: 0.5, fillOpacity: 0.5 });
-    
-                            layer.on("click", function () {
-                                let key = feature.properties.KEY_CODE;
-                                if (clickedMeshes.includes(key)) {
-                                    clickedMeshes = clickedMeshes.filter(item => item !== key);
-                                    layer.setStyle({ fillColor: "transparent" });
-                                } else {
-                                    clickedMeshes.push(key);
-                                    layer.setStyle({ fillColor: "royalblue" });
-                                }
-                            });
+        const SHEET_ID = "YOUR_SHEET_ID"; // スプレッドシートのIDを入力
+        const API_KEY = "YOUR_API_KEY"; // Google CloudのAPIキーを入力
+
+        fetch("MESH05436.geojson")
+        .then(response => response.json())
+        .then(data => {
+            L.geoJSON(data, {
+                onEachFeature: function (feature, layer) {
+                    layer.setStyle({ fillColor: "transparent", color: "black", weight: 0.5, fillOpacity: 0.5 });
+                    layer.on("click", function () {
+                        let key = feature.properties.KEY_CODE;
+                        if (clickedMeshes.includes(key)) {
+                            clickedMeshes = clickedMeshes.filter(item => item !== key);
+                            layer.setStyle({ fillColor: "transparent" });
+                        } else {
+                            clickedMeshes.push(key);
+                            layer.setStyle({ fillColor: "royalblue" });
                         }
                     });
-                    layers[layerName] = layer;
-                    return layer;
-                });
-        }
-    
-        // すべての GeoJSON を読み込んでレイヤーに追加
-        Promise.all(geojsonFiles.map((file, index) => loadGeoJSON(file, `Layer${index + 1}`)))
-            .then(loadedLayers => {
-                const layerGroup = L.layerGroup(loadedLayers).addTo(map);
+                }
+            }).addTo(map);
+        });
+
+        // Google Sheets にデータを保存
+        function saveToGoogleSheets() {
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${1GzXUMkBXwHvMTloI1mX0eh555T8GPMPLbFlE7j_98Fg}/values/Sheet1!A1:append?valueInputOption=USER_ENTERED&key=${AIzaSyDea6jrnlBzuqh5elWkkbZJvhxQQtKvwGE}`;
+            const data = {
+                values: [
+                    [new Date().toLocaleString(), clickedMeshes.join(",")]
+                ]
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log("データ保存成功:", result);
+                alert("データが Google Sheets に保存されました！");
+            })
+            .catch(error => {
+                console.error("データ保存エラー:", error);
+                alert("データ保存に失敗しました。");
             });
-    
-        // データダウンロード
-        function downloadData() {
-            const blob = new Blob([clickedMeshes.join(",")], { type: "text/plain" });
-            const a = document.createElement("a");
-            a.href = URL.createObjectURL(blob);
-            a.download = "clicked_mesh_data.txt";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
         }
     </script>
-    
 </body>
 </html>
+
