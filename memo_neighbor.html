@@ -3,82 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>国勢調査メッシュのクリック保存</title>
+    <title>国勢調査メッシュ</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-omnivore/leaflet-omnivore.min.js"></script>
-    <style>
-        #map { height: 600px; }
-    </style>
 </head>
-
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-<script>
-  // 🔹 Firebase 設定を追加（取得した設定をコピペ）
-  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
-  };
-
-  // 🔹 Firebase 初期化
-  const app = firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-
-  function saveToDatabase(keyCode) {
-    db.collection("selected_meshes").add({
-      key_code: keyCode,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    }).then(() => {
-      console.log("✅ データ保存成功:", keyCode);
-    }).catch((error) => {
-      console.error("❌ データ保存失敗:", error);
-    });
-  }
-</script>
-
-
 <body>
-    <div id="map"></div>
-    <button onclick="downloadData()">データをダウンロード</button>
+    <div id="map" style="height: 600px;"></div>
 
     <script>
-        const map = L.map("map").setView([36.0, 136.0], 10); // 初期座標を適宜変更
+        const map = L.map("map").setView([36.5, 136.5], 10);
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
 
-        let clickedMeshes = [];
-
         fetch("MESH05436.geojson")
-        .then(response => response.json())
-        .then(data => {
-            L.geoJSON(data, {
-                onEachFeature: function (feature, layer) {
-                    layer.on("click", function () {
-                        let key = feature.properties.KEY_CODE;
-                        console.log("Clicked KEY_CODE:", key);
-                        saveToDatabase(key);  // Firebase に保存
-                        layer.setStyle({ fillColor: "orange" });
-                    });
-                }
-            }).addTo(map);
-        })
-        .catch(error => console.error("GeoJSON 読み込みエラー:", error));
-
-        
-        // データダウンロード
-        function downloadData() {
-            const blob = new Blob([clickedMeshes.join(",")], { type: "text/plain" });
-            const a = document.createElement("a");
-            a.href = URL.createObjectURL(blob);
-            a.download = "clicked_mesh_data.txt";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
+            .then(response => response.json())
+            .then(data => {
+                console.log("GeoJSON データ:", data);
+                L.geoJSON(data, {
+                    style: function (feature) {
+                        return { color: "blue", weight: 1, fillOpacity: 0.5 };
+                    },
+                    onEachFeature: function (feature, layer) {
+                        layer.on("click", function () {
+                            let key = feature.properties.KEY_CODE;
+                            console.log("Clicked KEY_CODE:", key);
+                            layer.setStyle({ fillColor: "orange" });
+                        });
+                    }
+                }).addTo(map);
+            })
+            .catch(error => console.error("GeoJSON 読み込みエラー:", error));
     </script>
 </body>
 </html>
