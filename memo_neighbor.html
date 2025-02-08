@@ -34,42 +34,53 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
-  </script>
+</script>
 
 <body>
     <div id="map"></div>
     <button onclick="downloadData()">データをダウンロード</button>
 
     <script>
-        const map = L.map("map").setView([36.5, 136.5], 10); // 初期座標を適宜変更
+        const map = L.map("map").setView([36.5, 136.5], 10);
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
-
+    
         let clickedMeshes = [];
-
-        fetch("MESH05436.geojson")
-        .then(response => response.json())
-        .then(data => {
-            L.geoJSON(data, {
-                onEachFeature: function (feature, layer) {
-                    // 初期状態で塗りつぶしなし（透明）
-                    layer.setStyle({ fillColor: "transparent", color: "black", weight: 0.5, fillOpacity: 0.5 });
-
-                    layer.on("click", function () {
-                        let key = feature.properties.KEY_CODE;  // メッシュの識別キー
-                        if (clickedMeshes.includes(key)) {
-                            // すでに選択されている場合、選択解除（透明に戻す）
-                            clickedMeshes = clickedMeshes.filter(item => item !== key);
-                            layer.setStyle({ fillColor: "transparent" });  // 塗りつぶしなし
-                        } else {
-                            // 新たに選択する場合（青色に塗る）
-                            clickedMeshes.push(key);
-                            layer.setStyle({ fillColor: "royalblue" });  // 青色で塗りつぶし
+        let layers = {};  // 各メッシュレイヤーを保存
+    
+        // 複数の GeoJSON ファイルを指定
+        const geojsonFiles = ["MESH05436.geojson"];
+    
+        function loadGeoJSON(fileName, layerName) {
+            return fetch(fileName)
+                .then(response => response.json())
+                .then(data => {
+                    const layer = L.geoJSON(data, {
+                        onEachFeature: function (feature, layer) {
+                            layer.setStyle({ fillColor: "transparent", color: "black", weight: 0.5, fillOpacity: 0.5 });
+    
+                            layer.on("click", function () {
+                                let key = feature.properties.KEY_CODE;
+                                if (clickedMeshes.includes(key)) {
+                                    clickedMeshes = clickedMeshes.filter(item => item !== key);
+                                    layer.setStyle({ fillColor: "transparent" });
+                                } else {
+                                    clickedMeshes.push(key);
+                                    layer.setStyle({ fillColor: "royalblue" });
+                                }
+                            });
                         }
                     });
-                }
-            }).addTo(map);
-        });
-        
+                    layers[layerName] = layer;
+                    return layer;
+                });
+        }
+    
+        // すべての GeoJSON を読み込んでレイヤーに追加
+        Promise.all(geojsonFiles.map((file, index) => loadGeoJSON(file, `Layer${index + 1}`)))
+            .then(loadedLayers => {
+                const layerGroup = L.layerGroup(loadedLayers).addTo(map);
+            });
+    
         // データダウンロード
         function downloadData() {
             const blob = new Blob([clickedMeshes.join(",")], { type: "text/plain" });
@@ -81,5 +92,6 @@
             document.body.removeChild(a);
         }
     </script>
+    
 </body>
 </html>
