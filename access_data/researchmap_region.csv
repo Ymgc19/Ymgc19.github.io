@@ -1,104 +1,133 @@
 地域,市区町村,アクティブ ユーザー,新規ユーザー数,エンゲージのあったセッション数,エンゲージメント率,エンゲージメントのあったセッション数（1 アクティブ ユーザーあたり）,アクティブ ユーザーあたりの平均エンゲージメント時間,イベント数,キーイベント,ユーザー キーイベント率,合計収益
-Tokyo,(not set),247,245,118,0.4627450980392157,0.4777327935222672,16.635627530364374,1011,0,0,0
-Miyagi,Sendai,24,24,44,0.7096774193548387,1.8333333333333333,99.41666666666667,571,0,0,0
-Osaka,Osaka,17,16,8,0.47058823529411764,0.47058823529411764,3.588235294117647,61,0,0,0
+Tokyo,(not set),314,311,166,0.4984984984984985,0.5286624203821656,18.726114649681527,1311,0,0,0
+Miyagi,Sendai,38,37,70,0.7142857142857143,1.8421052631578947,98.94736842105263,865,0,0,0
+Osaka,Osaka,22,21,11,0.5,0.5,5.636363636363637,80,0,0,0
+Tokyo,Shinjuku City,12,11,2,0.16666666666666666,0.16666666666666666,6.5,39,0,0,0
+Hokkaido,Sapporo,9,9,5,0.5,0.5555555555555556,26.77777777777778,50,0,0,0
+Tokyo,Chuo City,9,9,3,0.3333333333333333,0.3333333333333333,8.666666666666666,32,0,0,0
+Aichi,Nagoya,8,6,5,0.625,0.625,11.625,41,0,0,0
 Tokyo,Shibuya City,8,8,4,0.5,0.5,22.125,32,0,0,0
-Tokyo,Shinjuku City,8,8,1,0.125,0.125,0,26,0,0,0
+County Dublin,Dublin,6,6,4,0.6666666666666666,0.6666666666666666,4,28,0,0,0
+Ibaraki,Tsukuba,6,5,6,0.8571428571428571,1,45.5,60,0,0,0
 North Carolina,Forest City,6,6,5,0.8333333333333334,0.8333333333333334,3.1666666666666665,28,0,0,0
-Aichi,Nagoya,5,5,3,0.5,0.6,11.2,32,0,0,0
 Fukuoka,Fukuoka,5,5,3,0.5,0.6,18.2,26,0,0,0
-Hokkaido,Sapporo,5,5,3,0.6,0.6,29.6,31,0,0,0
-County Dublin,Dublin,4,4,3,0.75,0.75,4.5,19,0,0,0
-Ishikawa,Kanazawa,4,4,2,0.4,0.5,12.5,22,0,0,0
-Kyoto,Kyoto,4,4,1,0.2,0.25,5.25,16,0,0,0
+Ishikawa,Kanazawa,5,5,3,0.5,0.6,13,26,0,0,0
+Kyoto,Kyoto,4,4,2,0.3333333333333333,0.5,13,19,0,0,0
+Oregon,Prineville,4,4,4,1,1,4.75,20,0,0,0
 Tokyo,Fuchu,4,4,0,0,0,0.5,14,0,0,0
+Fukui,Fukui,3,3,2,0.6666666666666666,0.6666666666666666,9.666666666666666,20,0,0,0
+Fukushima,Fukushima,3,3,1,0.3333333333333333,0.3333333333333333,0,13,0,0,0
 Kanagawa,Yokohama,3,3,2,0.6666666666666666,0.6666666666666666,23.333333333333332,15,0,0,0
 Saitama,Saitama,3,3,1,0.3333333333333333,0.3333333333333333,10,10,0,0,0
 Shizuoka,Shizuoka,3,3,3,1,1,24.333333333333332,13,0,0,0
+Tokyo,Nerima City,3,1,3,0.75,1,19,15,0,0,0
+Tokyo,Setagaya City,3,3,2,0.6666666666666666,0.6666666666666666,19,15,0,0,0
 Chiba,Noda,2,2,1,0.5,0.5,22,8,0,0,0
 Ehime,Niihama,2,2,1,0.5,0.5,16,7,0,0,0
-Fukui,Fukui,2,2,1,0.5,0.5,8.5,14,0,0,0
-Fukushima,Fukushima,2,2,1,0.5,0.5,0,9,0,0,0
+England,London,2,2,1,0.5,0.5,31,12,0,0,0
 Hiroshima,Higashihiroshima,2,2,2,1,1,22.5,9,0,0,0
+Hokkaido,Kitami,2,2,2,0.6666666666666666,1,46,10,0,0,0
 Hyogo,Kobe,2,2,2,1,1,58.5,9,0,0,0
+Hyogo,Nishinomiya,2,2,2,0.6666666666666666,1,104.5,23,0,0,0
 Hyogo,Shiso,2,2,2,1,1,10.5,8,0,0,0
-Ibaraki,Kasumigaura,2,2,2,1,1,46,19,0,0,0
-Ibaraki,Tsukuba,2,2,2,1,1,19,10,0,0,0
+Ibaraki,Kasumigaura,2,2,3,1,1.5,52,22,0,0,0
+Kanagawa,Sagamihara,2,2,2,1,1,21,10,0,0,0
+Massachusetts,Boston,2,2,1,0.5,0.5,28.5,8,0,0,0
 Nagano,Nagano,2,2,1,0.5,0.5,23.5,7,0,0,0
 Nagasaki,Nagasaki,2,2,1,0.5,0.5,16,10,0,0,0
 Norrbotten County,Lulea,2,2,1,0.5,0.5,3.5,9,0,0,0
-Oregon,Prineville,2,2,2,1,1,4.5,10,0,0,0
+Osaka,Ibaraki,2,2,2,1,1,53,13,0,0,0
+Osaka,Toyonaka,2,2,1,0.5,0.5,1,10,0,0,0
 Tochigi,Oyama,2,2,1,0.3333333333333333,0.5,8,10,0,0,0
-Tokyo,,2,2,1,0.3333333333333333,0.5,15,11,0,0,0
+Tokyo,Bunkyo City,2,2,0,0,0,0,6,0,0,0
 Tokyo,Kita City,2,2,0,0,0,3,8,0,0,0
+Tokyo,Koto City,2,2,1,0.5,0.5,31.5,12,0,0,0
 Tokyo,Mitaka,2,2,0,0,0,0,7,0,0,0
+Tokyo,Ota City,2,1,1,0.5,0.5,29,16,0,0,0
+Tokyo,Suginami City,2,2,1,0.5,0.5,23.5,7,0,0,0
+Tokyo,Taito City,2,2,2,1,1,39,41,0,0,0
 Virginia,Ashburn,2,2,2,1,1,2,10,0,0,0
+Yamanashi,Kofu,2,2,1,0.5,0.5,18.5,7,0,0,0
+,,1,0,0,0,0,51,13,0,0,0
 (not set),(not set),1,1,0,0,0,0,3,0,0,0
+Aichi,Kasugai,1,1,0,0,0,0,4,0,0,0
 Aichi,Toyohashi,1,1,1,1,1,48,8,0,0,0
-Akita,Akita,1,1,1,1,1,50,4,0,0,0
+Akita,Akita,1,1,1,0.5,1,50,6,0,0,0
+Buenos Aires,Buenos Aires,1,1,0,0,0,0,3,0,0,0
 California,Ridgecrest,1,1,0,0,0,0,3,0,0,0
 Central Luzon,Angeles,1,1,1,1,1,39,5,0,0,0
-Chiba,Chiba,1,1,0,0,0,0,3,0,0,0
+Chiba,Chiba,1,1,0,0,0,0,5,0,0,0
 Chiba,Kashiwa,1,1,0,0,0,1,4,0,0,0
+Chiba,Katsuura,1,1,1,1,1,7,4,0,0,0
 Chiba,Kimitsu,1,1,0,0,0,0,3,0,0,0
 Chiba,Kisarazu,1,1,1,1,1,10,4,0,0,0
 Chiba,Matsudo,1,1,0,0,0,0,3,0,0,0
 Chiba,Urayasu,1,1,0,0,0,0,3,0,0,0
-Ehime,Matsuyama,1,1,1,1,1,40,5,0,0,0
-England,London,1,1,1,1,1,62,9,0,0,0
+Ehime,Matsuyama,1,1,1,0.5,1,42,10,0,0,0
+Ehime,Uwajima,1,1,1,1,1,74,4,0,0,0
+Federal Territory of Kuala Lumpur,Kuala Lumpur,1,1,0,0,0,0,3,0,0,0
 Fukuoka,Iizuka,1,1,1,1,1,8,8,0,0,0
 Gunma,Takasaki,1,1,1,1,1,15,4,0,0,0
 Hiroshima,Hiroshima,1,1,0,0,0,0,3,0,0,0
-Hokkaido,Kitami,1,1,1,1,1,39,4,0,0,0
+Hokkaido,Engaru,1,1,1,0.5,1,59,11,0,0,0
 Hokkaido,Otofuke,1,1,0,0,0,0,3,0,0,0
 Hyogo,Akashi,1,0,1,1,1,9,4,0,0,0
-Hyogo,Nishinomiya,1,1,1,1,1,148,9,0,0,0
 Hyogo,Sanda,1,1,0,0,0,0,3,0,0,0
 Ibaraki,Hitachi,1,1,0,0,0,0,3,0,0,0
 Ibaraki,Mito,1,1,1,1,1,52,4,0,0,0
 Illinois,Chicago,1,1,0,0,0,0,3,0,0,0
 Iowa,Altoona,1,1,1,1,1,4,5,0,0,0
 Ishikawa,Nanao,1,0,5,1,5,299,55,0,0,0
+Iwate,Iwaizumi,1,1,1,1,1,259,5,0,0,0
 Iwate,Morioka,1,1,1,1,1,0,4,0,0,0
+Kagoshima,Kanoya,1,1,1,1,1,15,4,0,0,0
 Kanagawa,Chigasaki,1,1,1,1,1,53,4,0,0,0
+Kanagawa,Hiratsuka,1,0,0,0,0,1,3,0,0,0
 Kanagawa,Kamakura,1,1,1,1,1,0,3,0,0,0
 Kanagawa,Kawasaki,1,0,0,0,0,0,2,0,0,0
-Kanagawa,Sagamihara,1,1,1,1,1,28,5,0,0,0
 Kanagawa,Zama,1,1,1,1,1,62,5,0,0,0
 Kochi,Kochi,1,1,1,1,1,12,6,0,0,0
 Kyoto,Fukuchiyama,1,1,0,0,0,7,5,0,0,0
 Kyoto,Uji,1,1,1,1,1,50,5,0,0,0
 Louisiana,Hammond,1,1,1,1,1,0,4,0,0,0
-Massachusetts,Boston,1,1,1,1,1,57,5,0,0,0
 Massachusetts,Cambridge,1,1,1,1,1,27,5,0,0,0
+Mie,Toba,1,1,0,0,0,0,3,0,0,0
 Minnesota,Minneapolis,1,1,1,1,1,25,7,0,0,0
 Miyagi,Tome,1,1,1,1,1,102,5,0,0,0
+Nagano,Matsumoto,1,1,0,0,0,0,3,0,0,0
 New York,Cobleskill,1,1,0,0,0,0,3,0,0,0
 Niigata,Murakami,1,1,0,0,0,0,3,0,0,0
 North Holland,Haarlem,1,1,1,1,1,19,4,0,0,0
 Okayama,Kurashiki,1,1,1,1,1,3,4,0,0,0
+Okayama,Okayama,1,1,1,1,1,0,4,0,0,0
 Okayama,Tsuyama,1,1,1,1,1,18,5,0,0,0
-Osaka,Ibaraki,1,1,1,1,1,84,5,0,0,0
+Ontario,(not set),1,1,0,0,0,0,3,0,0,0
+Osaka,Higashiosaka,1,1,1,1,1,86,4,0,0,0
 Osaka,Neyagawa,1,1,0,0,0,0,3,0,0,0
 Osaka,Suita,1,1,1,1,1,0,4,0,0,0
-Osaka,Toyonaka,1,1,1,1,1,2,7,0,0,0
+Osaka,Tajiri,1,1,1,1,1,22,4,0,0,0
 Pays de la Loire,Les Sables-d'Olonne,1,1,1,1,1,15,4,0,0,0
+Saitama,Moroyama,1,1,1,1,1,155,22,0,0,0
+Saitama,Ranzan,1,1,1,1,1,27,14,0,0,0
 Shiga,Hikone,1,1,1,1,1,61,4,0,0,0
+Shiga,Otsu,1,1,1,1,1,34,4,0,0,0
+Shimane,Matsue,1,1,1,1,1,51,4,0,0,0
+Taipei City,(not set),1,1,1,1,1,28,4,0,0,0
 Texas,Dallas,1,1,0,0,0,0,3,0,0,0
 Tochigi,Utsunomiya,1,1,0,0,0,0,3,0,0,0
 Tokushima,Tokushima,1,1,0,0,0,0,3,0,0,0
 Tokyo,Adachi City,1,1,1,1,1,0,4,0,0,0
-Tokyo,Bunkyo City,1,1,0,0,0,0,3,0,0,0
 Tokyo,Chiyoda City,1,1,1,1,1,28,4,0,0,0
-Tokyo,Chofu,1,1,1,0.5,1,11,6,0,0,0
+Tokyo,Chofu,1,1,2,0.6666666666666666,2,32,9,0,0,0
 Tokyo,Edogawa City,1,1,0,0,0,0,3,0,0,0
 Tokyo,Katsushika City,1,1,0,0,0,4,4,0,0,0
-Tokyo,Koto City,1,1,0,0,0,0,4,0,0,0
+Tokyo,Machida,1,1,0,0,0,0,3,0,0,0
 Tokyo,Meguro City,1,1,0,0,0,0,3,0,0,0
 Tokyo,Minato City,1,1,1,0.5,1,49,10,0,0,0
-Tokyo,Ota City,1,0,1,1,1,58,12,0,0,0
-Tokyo,Setagaya City,1,1,0,0,0,9,5,0,0,0
+Tokyo,Shibuya,1,1,0,0,0,0,4,0,0,0
 Tokyo,Shinagawa City,1,1,0,0,0,0,3,0,0,0
-Tokyo,Suginami City,1,1,1,1,1,47,4,0,0,0
-Tokyo,Taito City,1,1,1,1,1,67,36,0,0,0
+Toyama,Nanto,1,1,0,0,0,0,3,0,0,0
+Yamagata,Yamagata,1,1,1,1,1,11,4,0,0,0
 Zurich,Zurich,1,1,0,0,0,0,3,0,0,0
+Fukuoka,Sasaguri,0,1,0,0,0,0,3,0,0,0
+Tokyo,,0,1,0,0,0,0,3,0,0,0
