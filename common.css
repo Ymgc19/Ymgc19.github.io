@@ -103,3 +103,7 @@ code b {
     height: auto; /* 縦横比を維持 */
     border: 1px solid #00d5ff; /* オプション：画像の枠線 */
 }
+
+.underline-text {
+    text-decoration: underline;
+  }
