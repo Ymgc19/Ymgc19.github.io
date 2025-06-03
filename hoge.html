@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>5x5 三目並べ + 爆弾 + 障害物</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 30px;
+    }
+    #board {
+      display: grid;
+      grid-template-columns: repeat(5, 60px);
+      grid-template-rows: repeat(5, 60px);
+      gap: 5px;
+      margin: auto;
+      width: max-content;
+    }
+    .cell {
+      width: 60px;
+      height: 60px;
+      font-size: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #444;
+      cursor: pointer;
+      background-color: #f0f0f0;
+      transition: background-color 0.3s;
+    }
+    .obstacle {
+      background-color: #999;
+      color: white;
+    }
+    .bomb {
+      background-color: crimson;
+      color: white;
+    }
+    .explode {
+      background-color: red !important;
+    }
+    .cell:hover {
+      background-color: #ddd;
+    }
+    #message {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>💣🚧 妨害! 3目並べ 🐸🐟</h1>
+  <h2>ルール</h2>
+  <p>
+    ・各ターンにプレイヤーは2つのアイコンを配置します．<br>
+    1つは自分のキャラクター（🐸 or 🐟）です．<br>
+    自分のキャラクターを先に3つ並べた方が勝ちです．<br>
+    もうひとつは妨害アイテム（💣 or 🚧）です．<br>
+  </p>
+  <p></p>
+  <p>
+    ・どちらの妨害アイテムを置けるかはランダムです．<br>
+    爆弾は確率0.2で，🚧は0.8で登場します．<br>
+  </p>
+  <p></p>
+  <p>
+    ・💣は，次の自分のターンの前に爆発します．<br>
+    爆発すると爆弾が配置されていたマスの行と列の要素が全てなくなります．
+  </p>
+  <p></p>
+  <p>
+    ・🚧は，そのマスに他のアイコンを配置できなくするだけのアイテムです．
+  </p>
+  <p></p>
+  <p>
+    ・ゲームはリロードするとリセットされます．
+  </p>
+
+
+  <div id="board"></div>
+  <div id="message">ゲーム開始</div>
+
+  <script>
+    const board = document.getElementById("board");
+    const message = document.getElementById("message");
+    const size = 5;
+    const cells = [];
+    let currentPlayer = "🐸";
+    let step = "mark";
+    const bombQueue = { "🐸": null, "🐟": null };
+
+    function createBoard() {
+      for (let i = 0; i < size * size; i++) {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.dataset.index = i;
+        cell.addEventListener("click", handleClick);
+        board.appendChild(cell);
+        cells.push(cell);
+      }
+      message.textContent = `${currentPlayer} の番：マークを置いてください`;
+    }
+
+    function getCell(x, y) {
+      if (x < 0 || x >= size || y < 0 || y >= size) return null;
+      return cells[x * size + y];
+    }
+
+    function getXY(cell) {
+      const index = parseInt(cell.dataset.index);
+      const x = Math.floor(index / size);
+      const y = index % size;
+      return [x, y];
+    }
+
+    async function handleClick(e) {
+      const cell = e.target;
+
+      if (message.textContent.includes("勝ち") || message.textContent.includes("引き分け")) return;
+
+      if (step === "explode") return;
+
+      if (step === "mark") {
+        if (cell.textContent || cell.classList.contains("obstacle") || cell.classList.contains("bomb")) {
+          alert("そのマスには置けません");
+          return;
+        }
+        cell.textContent = currentPlayer;
+        cell.style.fontWeight = "bold";
+        step = "special";
+        message.textContent = "アイテムを置いてください";
+      } else if (step === "special") {
+        if (cell.textContent || cell.classList.contains("obstacle") || cell.classList.contains("bomb")) {
+          alert("すでに埋まっています");
+          return;
+        }
+
+        const isBomb = Math.random() < 0.2;
+        if (isBomb) {
+          cell.textContent = "💣";
+          cell.classList.add("bomb");
+          bombQueue[currentPlayer] = getXY(cell);
+        } else {
+          cell.textContent = "🚧";
+          cell.classList.add("obstacle");
+        }
+
+        if (checkWin(currentPlayer)) {
+          message.textContent = `${currentPlayer} の勝ち！`;
+        } else if (cells.every(c => c.textContent)) {
+          message.textContent = "引き分け！";
+        } else {
+          currentPlayer = currentPlayer === "🐸" ? "🐟" : "🐸";
+          step = "explode";
+          message.textContent = `${currentPlayer} の爆弾処理中...`;
+          await explodeIfNeeded();
+          step = "mark";
+          message.textContent = `${currentPlayer} の番：マークを置いてください`;
+        }
+      }
+    }
+
+    async function explodeIfNeeded() {
+      const coords = bombQueue[currentPlayer];
+      if (!coords) return;
+
+      const [bx, by] = coords;
+      const targets = [];
+
+      for (let i = 0; i < size; i++) {
+        const rowCell = getCell(bx, i);
+        const colCell = getCell(i, by);
+        if (rowCell) targets.push(rowCell);
+        if (colCell) targets.push(colCell);
+      }
+
+      targets.forEach(c => c.classList.add("explode"));
+      await new Promise(r => setTimeout(r, 500));
+
+      targets.forEach(c => {
+        c.textContent = "";
+        c.classList.remove("explode", "bomb", "obstacle");
+      });
+
+      bombQueue[currentPlayer] = null;
+    }
+
+    function checkWin(player) {
+      const directions = [
+        [1, 0], [0, 1], [1, 1], [1, -1]
+      ];
+
+      for (let x = 0; x < size; x++) {
+        for (let y = 0; y < size; y++) {
+          for (const [dx, dy] of directions) {
+            const c1 = getCell(x, y);
+            const c2 = getCell(x + dx, y + dy);
+            const c3 = getCell(x + 2 * dx, y + 2 * dy);
+            if (c1 && c2 && c3 &&
+                c1.textContent === player &&
+                c2.textContent === player &&
+                c3.textContent === player) {
+              return true;
+            }
+          }
+        }
+      }
+      return false;
+    }
+
+    createBoard();
+  </script>
+</body>
+</html>
